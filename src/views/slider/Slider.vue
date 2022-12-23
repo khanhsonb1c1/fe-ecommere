@@ -2,42 +2,42 @@
     <div class="wrap">
         <div class="cont">
             <div id="slide">
-            <div class="item" style="background-image: url(../../assets/logo/banner-1-bg.jpg);">
+            <div class="item item1" >
                 <div class="content">
                     <div class="name">LUNDEV</div>
                     <div class="des">Tinh ru anh di chay pho, chua kip chay pho thi anhchay mat tieu</div>
                     <button>See more</button>
                 </div>
             </div>
-            <div class="item" style="background-image: url(../../assets/logo/banner-2-bg.jpg);">
+            <div class="item item2" >
                 <div class="content">
                     <div class="name">LUNDEV</div>
                     <div class="des">Tinh ru anh di chay pho, chua kip chay pho thi anhchay mat tieu</div>
                     <button>See more</button>
                 </div>
             </div>
-            <div class="item" style="background-image: url(../../assets/logo/banner.78d5595a.png);">
+            <div class="item item3" >
                 <div class="content">
                     <div class="name">LUNDEV</div>
                     <div class="des">Tinh ru anh di chay pho, chua kip chay pho thi anhchay mat tieu</div>
                     <button>See more</button>
                 </div>
             </div>
-            <div class="item" style="background-image: url(../../assets/logo/banner.78d5595a.png);">
+            <div class="item item4" >
                 <div class="content">
                     <div class="name">LUNDEV</div>
                     <div class="des">Tinh ru anh di chay pho, chua kip chay pho thi anhchay mat tieu</div>
                     <button>See more</button>
                 </div>
             </div>
-            <div class="item" style="background-image: url(../../assets/logo/banner.78d5595a.png);">
+            <div class="item item5" >
                 <div class="content">
                     <div class="name">LUNDEV</div>
                     <div class="des">Tinh ru anh di chay pho, chua kip chay pho thi anhchay mat tieu</div>
                     <button>See more</button>
                 </div>
             </div>
-            <div class="item" style="background-image: url(../../assets/logo/banner.78d5595a.png);">
+            <div class="item item6" >
                 <div class="content">
                     <div class="name">LUNDEV</div>
                     <div class="des">Tinh ru anh di chay pho, chua kip chay pho thi anhchay mat tieu</div>
@@ -62,10 +62,17 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.wrap{
-    background-color: #eaeaea;
-    overflow: hidden;
+
+.item1{
+    background-image: url(../../assets/logo/banner-1-bg.jpg);
 }
+.item2{
+    background-image: url(../../assets/logo/banner-2-bg.jpg);
+}
+.item3,.item4,.item5,.item6{
+    background-image: url(../../assets/logo/banner.78d5595a.png);
+}
+
 .cont{
     position: absolute;
     left:50%;
