@@ -1,188 +1,85 @@
 <template>
-    <div class="wrap">
-        <div class="cont">
-            <div id="slide">
-            <div class="item item1" >
-                <div class="content">
-                    <div class="name">LUNDEV</div>
-                    <div class="des">Tinh ru anh di chay pho, chua kip chay pho thi anhchay mat tieu</div>
-                    <button>See more</button>
-                </div>
-            </div>
-            <div class="item item2" >
-                <div class="content">
-                    <div class="name">LUNDEV</div>
-                    <div class="des">Tinh ru anh di chay pho, chua kip chay pho thi anhchay mat tieu</div>
-                    <button>See more</button>
-                </div>
-            </div>
-            <div class="item item3" >
-                <div class="content">
-                    <div class="name">LUNDEV</div>
-                    <div class="des">Tinh ru anh di chay pho, chua kip chay pho thi anhchay mat tieu</div>
-                    <button>See more</button>
-                </div>
-            </div>
-            <div class="item item4" >
-                <div class="content">
-                    <div class="name">LUNDEV</div>
-                    <div class="des">Tinh ru anh di chay pho, chua kip chay pho thi anhchay mat tieu</div>
-                    <button>See more</button>
-                </div>
-            </div>
-            <div class="item item5" >
-                <div class="content">
-                    <div class="name">LUNDEV</div>
-                    <div class="des">Tinh ru anh di chay pho, chua kip chay pho thi anhchay mat tieu</div>
-                    <button>See more</button>
-                </div>
-            </div>
-            <div class="item item6" >
-                <div class="content">
-                    <div class="name">LUNDEV</div>
-                    <div class="des">Tinh ru anh di chay pho, chua kip chay pho thi anhchay mat tieu</div>
-                    <button>See more</button>
-                </div>
-            </div>
-        </div>
-        <div class="buttons">
-            <button id="prev"><i class="fa-solid fa-angle-left"></i></button>
-            <button id="next"><i class="fa-solid fa-angle-right"></i></button>
-        </div>
-        </div>
+  <div class="slider-wrap">
+    <div class="main">
+      <img
+        src="../../assets/logo/banner.78d5595a.png"
+        alt=""
+        class="img-feature"
+      />
+      <div class="control prev">
+        <i class="fa-sharp fa-solid fa-chevron-left"></i>
+      </div>
+      <div class="control next">
+        <i class="fa-sharp fa-solid fa-chevron-right"></i>
+      </div>
+      <div class="list-image">
+        <div><img src="../../assets/logo/banner-1-bg.jpg" alt="" /></div>
+        <div><img src="../../assets/logo/banner-2-bg.jpg" alt="" /></div>
+        <div><img src="../../assets/logo/banner.78d5595a.png" alt="" /></div>
+        <div><img src="../../assets/logo/banner.78d5595a.png" alt="" /></div>
+        <div><img src="../../assets/logo/banner.78d5595a.png" alt="" /></div>
+      </div>
     </div>
-   
+  </div>
 </template>
 
 <script lang="ts" >
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 export default defineComponent({
-    components:{}
+  components: {},
 });
 </script>
-
 <style scoped>
-
-.item1{
-    background-image: url(../../assets/logo/banner-1-bg.jpg);
-}
-.item2{
-    background-image: url(../../assets/logo/banner-2-bg.jpg);
-}
-.item3,.item4,.item5,.item6{
-    background-image: url(../../assets/logo/banner.78d5595a.png);
+.slider-wrap {
+  height: 600px;
+  /* background: red; */
+  width: 1200px;
+  margin: 0 auto;
 }
 
-.cont{
-    position: absolute;
-    left:50%;
-    top:50%;
-    transform: translate(-50%,-50%);
-    width:1000px;
-    height:600px;
-    padding:50px;
-    background-color: #f5f5f5;
-    box-shadow: 0 30px 50px #dbdbdb;
+.main {
+  height: 80%;
+  margin-bottom: 20px;
+  position: relative;
 }
-#slide{
-    width:max-content;
-    margin-top:50px;
+
+.list-image {
+  margin-top: 20px;
+  height: 15%;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
-.item{
-    width:200px;
-    height:300px;
-    background-position: 50% 50%;
-    display: inline-block;
-    transition: 0.5s;
-    background-size: cover;
-    position: absolute;
-    z-index: 1;
-    top:50%;
-    transform: translate(0,-50%);
-    border-radius: 20px;
-    box-shadow:  0 30px 50px #505050;
+
+.list-image div {
+  flex: 1;
+  padding: 5px;
 }
-.item:nth-child(1),
-.item:nth-child(2){
-    left:0;
-    top:0;
-    transform: translate(0,0);
-    border-radius: 0;
-    width:100%;
-    height:100%;
-    box-shadow: none;
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
-.item:nth-child(3){
-    left:50%;
+
+.control {
+  position: absolute;
+  top: 50%;
+  font-size: 50px;
+  color: white;
+  transform: translateY(-50%);
 }
-.item:nth-child(4){
-    left:calc(50% + 220px);
+
+.prev {
+  left: 10px;
 }
-.item:nth-child(5){
-    left:calc(50% + 440px);
+
+.next {
+  right: 10px;
 }
-.item:nth-child(n+6){
-    left:calc(50% + 660px);
-    opacity: 0;
-}
-.item .content{
-    position: absolute;
-    top:50%;
-    left:100px;
-    width:300px;
-    text-align: left;
-    padding:0;
-    color:#eee;
-    transform: translate(0,-50%);
-    display: none;
-    font-family: system-ui;
-}
-.item:nth-child(2) .content{
-    display: block;
-    z-index: 11111;
-}
-.item .name{
-    font-size: 40px;
-    font-weight: bold;
-    opacity: 0;
-    animation:showcontent 1s ease-in-out 1 forwards
-}
-.item .des{
-    margin:20px 0;
-    opacity: 0;
-    animation:showcontent 1s ease-in-out 0.3s 1 forwards
-}
-.item button{
-    padding:10px 20px;
-    border:none;
-    opacity: 0;
-    animation:showcontent 1s ease-in-out 0.6s 1 forwards
-}
-@keyframes showcontent{
-    from{
-        opacity: 0;
-        transform: translate(0,100px);
-        filter:blur(33px);
-    }to{
-        opacity: 1;
-        transform: translate(0,0);
-        filter:blur(0);
-    }
-}
-.buttons{
-    position: absolute;
-    bottom:30px;
-    z-index: 222222;
-    text-align: center;
-    width:100%;
-}
-.buttons button{
-    width:50px;
-    height:50px;
-    border-radius: 50%;
-    border:1px solid #555;
-    transition: 0.5s;
-}.buttons button:hover{
-    background-color: #bac383;
+
+.active{
+    background: rgb(245, 58, 58);
 }
 </style>
