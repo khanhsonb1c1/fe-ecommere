@@ -1,24 +1,61 @@
 <template>
-  <div class="slider-wrap">
-    <div class="main">
-      <img
-        src="../../assets/logo/banner.78d5595a.png"
-        alt=""
-        class="img-feature"
-      />
-      <div class="control prev">
-        <i class="fa-sharp fa-solid fa-chevron-left"></i>
+  <div class="container mt-5">
+    <div
+      id="carouselExampleIndicators"
+      class="carousel slide"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
       </div>
-      <div class="control next">
-        <i class="fa-sharp fa-solid fa-chevron-right"></i>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="../../assets/logo/banner.78d5595a.png" class="d-block w-100" alt="..." />
+        </div>
+        <div class="carousel-item">
+          <img src="../../assets/logo/banner.78d5595a.png" class="d-block w-100" alt="..." />
+        </div>
+        <div class="carousel-item">
+          <img src="../../assets/logo/banner.78d5595a.png" class="d-block w-100" alt="..." />
+        </div>
       </div>
-      <div class="list-image">
-        <div><img src="../../assets/logo/banner-1-bg.jpg" alt="" /></div>
-        <div><img src="../../assets/logo/banner-2-bg.jpg" alt="" /></div>
-        <div><img src="../../assets/logo/banner.78d5595a.png" alt="" /></div>
-        <div><img src="../../assets/logo/banner.78d5595a.png" alt="" /></div>
-        <div><img src="../../assets/logo/banner.78d5595a.png" alt="" /></div>
-      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
   </div>
 </template>
@@ -29,57 +66,3 @@ export default defineComponent({
   components: {},
 });
 </script>
-<style scoped>
-.slider-wrap {
-  height: 600px;
-  /* background: red; */
-  width: 1200px;
-  margin: 0 auto;
-}
-
-.main {
-  height: 80%;
-  margin-bottom: 20px;
-  position: relative;
-}
-
-.list-image {
-  margin-top: 20px;
-  height: 15%;
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-}
-
-.list-image div {
-  flex: 1;
-  padding: 5px;
-}
-
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.control {
-  position: absolute;
-  top: 50%;
-  font-size: 50px;
-  color: white;
-  transform: translateY(-50%);
-}
-
-.prev {
-  left: 10px;
-}
-
-.next {
-  right: 10px;
-}
-
-.active{
-    background: rgb(245, 58, 58);
-}
-</style>
