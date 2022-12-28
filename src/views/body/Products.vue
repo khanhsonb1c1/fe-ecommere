@@ -1,7 +1,18 @@
 <template>
-  <ProductList title="danh sách sản phẩm">
+  <ProductList >
     <template #item>
-      <ProductCard v-for="(product, index) in product_list" :key="index" :item="product"/>
+      <ProductCard
+        v-for="(product, index) in product_list"
+        :key="index"
+        :item="product"
+      />
+    </template>
+    <template #pagination>
+      <Pagination
+        :total-pages="last_page"
+        :current-page="page"
+        @pagechanged="onPageChange"
+      />
     </template>
   </ProductList>
 </template>
@@ -10,10 +21,11 @@
 import { defineComponent } from "vue";
 import ProductCard from "../../components/container/card/ProductCard.vue";
 import ProductList from "../../components/container/layout/ProductList.vue";
+import Pagination from "../../components/container/pagination/Pagination.vue";
 import { productStore } from "../../stores/product";
 
 export default defineComponent({
-  components: { ProductList, ProductCard },
+  components: { ProductList, ProductCard, Pagination },
 
   data() {
     return {
@@ -21,19 +33,35 @@ export default defineComponent({
     };
   },
 
-  created(){
-    this.getProductList()
+  created() {
+    this.getProductList();
   },
 
-  computed:{
-    product_list(){
+  computed: {
+    product_list() {
       return productStore().product_list;
+    },
+    last_page(){
+      return productStore().last_page;
     }
+
+
+  },
+
+  watch: {
+    page() {
+      this.getProductList();
+    },
   },
 
   methods: {
     getProductList() {
-      productStore().getProductList(1);
+      productStore().getProductList(this.page);
+    },
+
+    onPageChange(page: number) {
+      console.log(page);
+      this.page = page;
     },
   },
 });

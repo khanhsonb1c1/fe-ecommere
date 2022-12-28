@@ -5127,7 +5127,10 @@ fieldset:disabled .btn {
 .pagination {
     display: flex;
     padding-left: 0;
-    list-style: none
+    list-style: none;
+    justify-content: center
+
+
 }
 
 .page-link {
