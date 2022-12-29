@@ -10,10 +10,10 @@
         </a>
       </li>
       <li
-        class="page-item"
         v-for="page in pages"
         :key="page.name"
         @click="onClickPage(page.name)"
+        :class="[page.name == currentPage ? 'active' : '', 'page-item']"
       >
         <a class="page-link">{{ page.name }}</a>
       </li>
@@ -43,7 +43,7 @@ export default defineComponent({
       type: Number,
       required: true,
     },
-    
+
     currentPage: {
       type: Number,
       required: true,

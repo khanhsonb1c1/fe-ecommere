@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-2 col-md-6 col-12">
+  <div class="col-lg-3 col-md-6 col-12">
     <div class="single-product">
       <div class="product-image">
         <img :src="item?.image_url" />
@@ -44,7 +44,7 @@ export default defineComponent({
   object-fit: cover;
 }
 .single-product{
-  height: 3in;
+  height: 4in;
 }
 .single-product .product-info{
   padding: 0 !important;

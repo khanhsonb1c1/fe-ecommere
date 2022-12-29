@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import _ from "lodash";
 import HomePageVue from "./views/HomePage.vue";
+import ProductPage from "./views/ProductPage.vue";
 import LoginPage from './views/auth/LoginPage.vue';
 
 const router = createRouter({
@@ -23,6 +24,15 @@ const router = createRouter({
       meta: {
         title: "Đăng nhập",
         // authRequired: true,
+      },
+    },
+    {
+      path: "/product",
+      name: "product",
+      component: ProductPage,
+      meta: {
+        title: "Sản phẩm",
+
       },
     },
     
