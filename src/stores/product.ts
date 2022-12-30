@@ -22,6 +22,9 @@ export const productStore = defineStore({
             price: 0,
         }],
 
+        filter: {} as any,
+
+        filter_list: [],
 
         current_page: 1 as number,
         last_page: 0 as number,
@@ -43,6 +46,13 @@ export const productStore = defineStore({
                     reject(err)
                 })
             });
+        },
+
+        updateCategoryFilter(value: any) {
+            this.filter.category = value
+        },
+        updateOriginFilter(value: any) {
+            this.filter.origin = value
         },
     },
 });

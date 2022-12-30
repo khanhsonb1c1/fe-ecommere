@@ -11,10 +11,14 @@
       <div class="wrapper">
         <button
           type="button"
-          class="btn btn-outline-primary"
           style="margin: 10px 10px 0px 0px"
           v-for="(category, index) in category_list"
           :key="index"
+          :class="[
+            category.name == filter.category ? 'active' : '',
+            'btn btn-outline-primary',
+          ]"
+          @click="handleClickFilterCategory(category.name)"
         >
           {{ category.name }}
         </button>
@@ -30,10 +34,14 @@
       <div class="wrapper">
         <button
           type="button"
-          class="btn btn-outline-primary"
           style="margin: 10px 10px 0px 0px"
           v-for="(origin, index) in origin_list"
           :key="index"
+          @click="handleClickFilterOrigin(origin.name)"
+          :class="[
+            origin.name == filter.origin ? 'active' : '',
+            'btn btn-outline-primary',
+          ]"
         >
           {{ origin.name || "Không xác định" }}
         </button>
@@ -53,6 +61,7 @@
           style="margin: 10px 10px 0px 0px"
           v-for="(item, index) in embargo_list"
           :key="index"
+          @click="handleFilterEmbargo(item.id)"
         >
           {{ item.name }}
         </button>
@@ -65,6 +74,7 @@
 import { defineComponent } from "vue";
 import { categoryStore } from "../../../stores/category";
 import { originStore } from "../../../stores/orgin";
+import { productStore } from "../../../stores/product";
 
 export default defineComponent({
   data() {
@@ -77,8 +87,10 @@ export default defineComponent({
         { name: "Cấm bay", id: "banned_air" },
       ],
 
-      filter:{
-        
+      filterEmbrago: [] as any,
+      filter: {
+        category: undefined,
+        origin: undefined,
       },
     };
   },
@@ -105,6 +117,19 @@ export default defineComponent({
     },
     getOriginList() {
       originStore().getOriginList();
+    },
+
+    handleClickFilterOrigin(value: any) {
+      this.filter.origin = value;
+      productStore().updateOriginFilter(value)
+    },
+    handleClickFilterCategory(value: any) {
+      this.filter.category = value;
+      productStore().updateCategoryFilter(value)
+    },
+
+    handleFilterEmbargo(value: any) {
+      this.filterEmbrago.push({ [`filter[${value}]`]: true });
     },
   },
 });

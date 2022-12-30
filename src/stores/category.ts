@@ -19,9 +19,7 @@ export const categoryStore = defineStore({
     actions: {
         getCategoryList() {
             return new Promise((resolve, reject) => {
-                categories.getCategory({
-                    include: 'parent'
-                }).then(res => {
+                categories.getCategory().then(res => {
                     this.category_list = res.data;
                     resolve(res.data)
                 }).catch(err => {

@@ -2,13 +2,13 @@
   <Header />
   <ProductList>
     <template #sort>
-      <menu-sort/>
+      <menu-sort />
     </template>
     <template #filter>
-      <ButtonLabelFilter/>
+      <ButtonLabelFilter v-for="(filter, index) in get_filter" :key="index" :item="filter"/>
     </template>
     <template #menu>
-        <MenuFilter/>
+      <MenuFilter />
     </template>
     <template #item>
       <ProductCard
@@ -39,7 +39,15 @@ import MenuSort from "../components/container/menu/MenuSort.vue";
 import ButtonLabelFilter from "../components/container/button/ButtonLabelFilter.vue";
 
 export default defineComponent({
-  components: { ProductList, ProductCard, Pagination, Header, MenuFilter, MenuSort, ButtonLabelFilter },
+  components: {
+    ProductList,
+    ProductCard,
+    Pagination,
+    Header,
+    MenuFilter,
+    MenuSort,
+    ButtonLabelFilter,
+  },
 
   data() {
     return {
@@ -57,6 +65,9 @@ export default defineComponent({
     },
     last_page() {
       return productStore().last_page;
+    },
+    get_filter() {
+      return productStore().filter;
     },
   },
 

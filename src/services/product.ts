@@ -12,8 +12,8 @@ const products = {
 };
 
 const categories = {
-  getCategory(params: object) {
-    return product.get(`/api/categories`,{ params });
+  getCategory() {
+    return product.get(`/api/categories?include=parent`);
   },
   // getCategoryDetail(id:string, params: object) {
   //   return product.get(`/api/categories/${id}`,{ params });

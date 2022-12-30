@@ -10,7 +10,11 @@
             <slot name="sort"></slot>
           </div>
           <div class="row">
-            <slot name="filter"></slot>
+            <ul class="nav" style="margin-left: 15px">
+              <li class="nav-item" style="margin: 20px 5px">
+                <slot name="filter"></slot></li>
+            </ul>
+           
           </div>
           <div class="row">
             <slot name="item"></slot>
