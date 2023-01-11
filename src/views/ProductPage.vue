@@ -5,7 +5,7 @@
       <menu-sort />
     </template>
     <template #filter>
-      <ButtonLabelFilter v-for="(filter, index) in get_filter" :key="index" :item="filter"/>
+      <ButtonLabelFilter />
     </template>
     <template #menu>
       <MenuFilter />
@@ -26,8 +26,8 @@
     </template>
   </ProductList>
 </template>
-  
-  <script lang="ts">
+
+<script lang="ts">
 import { defineComponent } from "vue";
 import ProductCard from "../components/container/card/ProductCard.vue";
 import ProductList from "../components/container/layout/ProductList.vue";
@@ -89,5 +89,5 @@ export default defineComponent({
   },
 });
 </script>
-  
-  ProductCard
+
+ProductCard

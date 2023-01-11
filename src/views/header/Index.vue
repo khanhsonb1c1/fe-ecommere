@@ -362,6 +362,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useAuthStore } from "../../stores/auth";
+import { categoryStore } from "../../stores/category";
 export default defineComponent({
   computed: {
     authenticated() {
@@ -371,6 +372,9 @@ export default defineComponent({
       return useAuthStore().me;
     },
   },
+  // created() {
+  //   categoryStore().getCategories();
+  // },
   methods: {
     logout() {
       useAuthStore()

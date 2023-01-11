@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { categories } from "../services/product";
 
 export const categoryStore = defineStore({
-    id: "category",
+    id: "categories",
     state: () => ({
 
         category_list: [{
@@ -15,9 +15,11 @@ export const categoryStore = defineStore({
             }
         }]
     }),
-    getters: {},
+    getters: {
+        get_categories: (state) => state.category_list
+    },
     actions: {
-        getCategoryList() {
+        getCategories() {
             return new Promise((resolve, reject) => {
                 categories.getCategory().then(res => {
                     this.category_list = res.data;

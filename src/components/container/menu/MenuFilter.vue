@@ -57,50 +57,46 @@
       <div class="wrapper">
         <button
           type="button"
-          class="btn btn-outline-primary"
           style="margin: 10px 10px 0px 0px"
           v-for="(item, index) in embargo_list"
           :key="index"
-          @click="handleFilterEmbargo(item.id)"
+          :class="['btn btn-outline-primary']"
+          @click="handleFilterEmbargo(item.id), (item.stt = true)"
         >
           {{ item.name }}
         </button>
       </div>
     </div>
+    <button @click="handleCheck">check</button>
   </div>
 </template>
-  
-  <script lang="ts">
+
+<script lang="ts">
 import { defineComponent } from "vue";
 import { categoryStore } from "../../../stores/category";
 import { originStore } from "../../../stores/orgin";
 import { productStore } from "../../../stores/product";
+import _ from "lodash";
 
 export default defineComponent({
   data() {
     return {
       embargo_list: [
-        { name: "Hàng hóa đặc biệt", id: "special" },
-        { name: "Giấy phép riêng", id: "private_license" },
-        { name: "Cấm xuất khẩu", id: "banned_export" },
-        { name: "Cấm biển", id: "banned_sea" },
-        { name: "Cấm bay", id: "banned_air" },
+        { stt: false, name: "Hàng hóa đặc biệt", id: "special" },
+        { stt: false, name: "Giấy phép riêng", id: "private_license" },
+        { stt: false, name: "Cấm xuất khẩu", id: "banned_export" },
+        { stt: false, name: "Cấm biển", id: "banned_sea" },
+        { stt: false, name: "Cấm bay", id: "banned_air" },
       ],
-
-      filterEmbrago: [] as any,
-      filter: {
-        category: undefined,
-        origin: undefined,
-      },
     };
   },
   created() {
-    this.getOriginList();
+    setTimeout(() => {
+      categoryStore().getCategories();
+    }, 1000);
+    originStore().getOriginList();
   },
 
-  mounted() {
-    this.getCategoryList();
-  },
   computed: {
     category_list() {
       return categoryStore().category_list;
@@ -109,32 +105,53 @@ export default defineComponent({
     origin_list() {
       return originStore().origin_list;
     },
+
+    filter() {
+      return productStore().filter;
+    },
+
+    // checkEmbrago(value: any) {
+    //   return _.has(this.filter, `${value}`);
+    // },
   },
 
   methods: {
-    getCategoryList() {
-      categoryStore().getCategoryList();
-    },
-    getOriginList() {
-      originStore().getOriginList();
-    },
-
     handleClickFilterOrigin(value: any) {
-      this.filter.origin = value;
-      productStore().updateOriginFilter(value)
+      // this.filter.origin = value;
+      productStore().updateOriginFilter(value);
     },
     handleClickFilterCategory(value: any) {
-      this.filter.category = value;
-      productStore().updateCategoryFilter(value)
+      // this.filter.category = value;
+      productStore().updateCategoryFilter(value);
+    },
+
+    handleCheck() {
+      productStore().getProductList(1);
     },
 
     handleFilterEmbargo(value: any) {
-      this.filterEmbrago.push({ [`filter[${value}]`]: true });
+      switch (value) {
+        case "special":
+          productStore().updateSpecialFilter();
+          break;
+        case "private_license":
+          productStore().updatePrivateLicenseFilter();
+          break;
+        case "banned_export":
+          productStore().updateBannedExportFilter();
+          break;
+        case "banned_air":
+          productStore().updateBannedAirFilter();
+          break;
+        case "banned_sea":
+          productStore().updateBannedSeaFilter();
+          break;
+      }
     },
   },
 });
 </script>
-  
+
 <style scoped>
 span {
   color: #0e0e0e;
