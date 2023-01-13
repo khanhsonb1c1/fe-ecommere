@@ -7,7 +7,8 @@
           type="radio"
           name="flexRadioDefault"
           id="flexRadioDefault2"
-          checked
+          value="price"
+          v-model="sort"
         />
         <label class="form-check-label" for="flexRadioDefault2">
           Giá thấp -> Cao
@@ -21,7 +22,8 @@
           type="radio"
           name="flexRadioDefault"
           id="flexRadioDefault2"
-          checked
+          value="-price"
+          v-model="sort"
         />
         <label class="form-check-label" for="flexRadioDefault2">
           Giá cao -> Thấp
@@ -36,6 +38,8 @@
           name="flexRadioDefault"
           id="flexRadioDefault2"
           checked
+          value="-created_at"
+          v-model="sort"
         />
         <label class="form-check-label" for="flexRadioDefault2">
           Ngày cập nhật
@@ -47,17 +51,42 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-export default defineComponent({});
+import { productStore } from "../../../stores/product";
+export default defineComponent({
+  data() {
+    return {
+      sort: "-created_at",
+    };
+  },
+
+  // computed: {
+  //   get_sort(){
+  //     return productStore().sort
+  //   },
+  // },
+
+  watch:{
+    sort(){
+      this.handleSort()
+    }
+  },
+
+  methods:{
+    handleSort(){
+      productStore().updateSort(this.sort)
+    }
+  }
+});
 </script>   
 
 <style scoped>
-.nav-item{
-    margin: 0px 30px 0px 20px;
+.nav-item {
+  margin: 0px 30px 0px 20px;
 }
-input{
-    font-size: 1.2rem;
+input {
+  font-size: 1.2rem;
 }
-label{
-    font-size: 1.2rem;
+label {
+  font-size: 1.2rem;
 }
 </style>

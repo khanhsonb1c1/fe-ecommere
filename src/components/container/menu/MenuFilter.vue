@@ -18,7 +18,7 @@
             category.name == filter.category ? 'active' : '',
             'btn btn-outline-primary',
           ]"
-          @click="handleClickFilterCategory(category.name)"
+          @click="handleClickFilterCategory(category.id, category.name)"
         >
           {{ category.name }}
         </button>
@@ -37,7 +37,7 @@
           style="margin: 10px 10px 0px 0px"
           v-for="(origin, index) in origin_list"
           :key="index"
-          @click="handleClickFilterOrigin(origin.name)"
+          @click="handleClickFilterOrigin(origin.id, origin.name)"
           :class="[
             origin.name == filter.origin ? 'active' : '',
             'btn btn-outline-primary',
@@ -55,19 +55,15 @@
       </div>
 
       <div class="wrapper">
-        <button
-          type="button"
-          style="margin: 10px 10px 0px 0px"
-          v-for="(item, index) in embargo_list"
-          :key="index"
-          :class="['btn btn-outline-primary']"
-          @click="handleFilterEmbargo(item.id), (item.stt = true)"
-        >
-          {{ item.name }}
-        </button>
+        <button-embargo-item
+          v-for="item in embargo_list"
+          :key="item.id"
+          :item="item"
+          :filter="filter"
+        />
       </div>
     </div>
-    <button @click="handleCheck">check</button>
+    <!-- <button @click="handleCheck">check</button> -->
   </div>
 </template>
 
@@ -77,16 +73,18 @@ import { categoryStore } from "../../../stores/category";
 import { originStore } from "../../../stores/orgin";
 import { productStore } from "../../../stores/product";
 import _ from "lodash";
+import ButtonEmbargoItem from "../button/ButtonEmbargoItem.vue";
 
 export default defineComponent({
+  components: { ButtonEmbargoItem },
   data() {
     return {
       embargo_list: [
-        { stt: false, name: "Hàng hóa đặc biệt", id: "special" },
-        { stt: false, name: "Giấy phép riêng", id: "private_license" },
-        { stt: false, name: "Cấm xuất khẩu", id: "banned_export" },
-        { stt: false, name: "Cấm biển", id: "banned_sea" },
-        { stt: false, name: "Cấm bay", id: "banned_air" },
+        { name: "Hàng hóa đặc biệt", id: "special" },
+        { name: "Giấy phép riêng", id: "private_license" },
+        { name: "Cấm xuất khẩu", id: "banned_export" },
+        { name: "Cấm biển", id: "banned_sea" },
+        { name: "Cấm bay", id: "banned_air" },
       ],
     };
   },
@@ -96,6 +94,16 @@ export default defineComponent({
     }, 1000);
     originStore().getOriginList();
   },
+
+  // watch: {
+  //   filter: {
+  //     immediate: true,
+  //     deep: true,
+  //     handler(new_temp) {
+  //       alert("hdhdhdhd");
+  //     },
+  //   },
+  // },
 
   computed: {
     category_list() {
@@ -107,46 +115,18 @@ export default defineComponent({
     },
 
     filter() {
-      return productStore().filter;
+      return productStore().filter_name;
     },
-
-    // checkEmbrago(value: any) {
-    //   return _.has(this.filter, `${value}`);
-    // },
   },
 
   methods: {
-    handleClickFilterOrigin(value: any) {
+    handleClickFilterOrigin(id: string, value: any) {
       // this.filter.origin = value;
-      productStore().updateOriginFilter(value);
+      productStore().updateOriginFilter(id, value);
     },
-    handleClickFilterCategory(value: any) {
+    handleClickFilterCategory(id: string, value: any) {
       // this.filter.category = value;
-      productStore().updateCategoryFilter(value);
-    },
-
-    handleCheck() {
-      productStore().getProductList(1);
-    },
-
-    handleFilterEmbargo(value: any) {
-      switch (value) {
-        case "special":
-          productStore().updateSpecialFilter();
-          break;
-        case "private_license":
-          productStore().updatePrivateLicenseFilter();
-          break;
-        case "banned_export":
-          productStore().updateBannedExportFilter();
-          break;
-        case "banned_air":
-          productStore().updateBannedAirFilter();
-          break;
-        case "banned_sea":
-          productStore().updateBannedSeaFilter();
-          break;
-      }
+      productStore().updateCategoryFilter(id, value);
     },
   },
 });

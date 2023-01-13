@@ -55,7 +55,7 @@ import _ from "lodash";
 export default defineComponent({
   computed: {
     filter() {
-      return productStore().filter;
+      return productStore().filter_name;
     },
   },
 

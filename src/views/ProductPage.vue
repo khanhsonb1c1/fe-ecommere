@@ -12,8 +12,8 @@
     </template>
     <template #item>
       <ProductCard
-        v-for="(product, index) in product_list"
-        :key="index"
+        v-for="product in product_list"
+        :key="product.id"
         :item="product"
       />
     </template>
@@ -75,6 +75,13 @@ export default defineComponent({
     page() {
       this.getProductList();
     },
+
+    get_filter: {
+      deep: true,
+      handler() {
+        this.getProductList();
+      },
+    },
   },
 
   methods: {
@@ -89,5 +96,3 @@ export default defineComponent({
   },
 });
 </script>
-
-ProductCard
