@@ -59,6 +59,7 @@ export const useAuthStore = defineStore({
         signInWithEmailAndPassword(getAuth(), email, password)
           .then(() => {
             this.me = getAuth().currentUser;
+            
             resolve(this.me);
           })
           .catch((error) => {

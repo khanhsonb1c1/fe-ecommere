@@ -1,8 +1,12 @@
+import { useAuthStore } from './stores/auth';
 import { createRouter, createWebHistory } from "vue-router";
 import _ from "lodash";
 import HomePageVue from "./views/HomePage.vue";
 import ProductPage from "./views/ProductPage.vue";
+import ProductDetailPage from "./views/ProductDetailPage.vue";
 import LoginPage from './views/auth/LoginPage.vue';
+import CartPayment from './views/cart/CartPayment.vue'
+import { nextTick } from 'vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -35,38 +39,55 @@ const router = createRouter({
 
       },
     },
+    {
+      path: "/product/:id",
+      name: "product_detail",
+      component: ProductDetailPage,
+      meta: {
+        title: "Chi tiết sản phẩm",
+
+      },
+    },
+    {
+      path: "/payment",
+      name: "payment",
+      component: CartPayment,
+      meta: {
+        title: "Thanh toán",
+        authRequired: true,
+
+      },
+    },
     
   ],
 });
 
-// router.beforeEach((routeTo, routeFrom, next) => {
-//   const authRequired = routeTo.matched.some((route) => route.meta.authRequired);
-//   if (!authRequired) {
-//     return next();
-//   }
+router.beforeEach((routeTo, routeFrom, next) => {
+  const authRequired = routeTo.matched.some((route) => route.meta.authRequired);
+  if (!authRequired) {
+    return next();
+  }
 
-//   useAuthStore()
-//     .authenticate()
-//     .then(() => {
-//       if (_.isEmpty(notificationStore().noti_list[0])) {
-//         notificationStore().getNotification(1, {});
-//       }
-//       if (_.isEmpty(useAuthStore().user_info.id)) {
-//         useAuthStore().getUserInfo();
-//       }
+  useAuthStore()
+    .authenticate()
+    .then(() => {
 
-//       return next();
-//     })
-//     .catch(() => {
-//       router.push({ path: "/login" });
-//     });
-// });
+      if (_.isEmpty(useAuthStore().user_info.id)) {
+        useAuthStore().getUserInfo();
+      }
 
-// router.afterEach((to) => {
-//   nextTick(() => {
-//     document.title =
-//       (to.meta.title || to.name) + " | " + import.meta.env.VITE_APP_NAME;
-//   });
-// });
+      return next();
+    })
+    .catch(() => {
+      router.push({ path: "/login" });
+    });
+});
+
+router.afterEach((to) => {
+  nextTick(() => {
+    document.title =
+      (to.meta.title || to.name) + " | " + import.meta.env.VITE_APP_NAME;
+  });
+});
 
 export default router;

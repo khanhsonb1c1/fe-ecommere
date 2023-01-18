@@ -59,12 +59,6 @@ export default defineComponent({
     };
   },
 
-  // computed: {
-  //   get_sort(){
-  //     return productStore().sort
-  //   },
-  // },
-
   watch:{
     sort(){
       this.handleSort()

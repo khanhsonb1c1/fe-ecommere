@@ -22,14 +22,14 @@ export const formatValueMinxin = {
   
       formatPrice(value: number) {
         const val = (value / 1).toFixed().replace(".", ",");
-        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")+' ¥';
       },
   
-      getPrice(value: number, currency: string) {
-        return `${this.formatPrice(value)} ${
-          currency == "VND" ? "đ" : currency == "JPY" ? "¥" : currency
-        }`;
-      },
+      // getPrice(value: number, currency: string) {
+      //   return `${this.formatPrice(value)} ${
+      //     currency == "VND" ? "đ" : currency == "JPY" ? "¥" : currency
+      //   }`;
+      // },
   
       getVolume(value: number) {
         return value / 1000000;
@@ -41,7 +41,6 @@ export const formatValueMinxin = {
   
       checkPhoneNumber(str: any) {
         const check = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3,4}[-\s\.]?[0-9]{0,3}$/im; // eslint-disable-line
-  
         const result = check.test(str);
         return result;
       },

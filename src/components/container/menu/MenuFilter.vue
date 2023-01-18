@@ -1,14 +1,14 @@
 <template>
   <div class="menu mt-5">
     <div class="menu-filter">
-      <div class="content">
+      <div class="content" @click="show_menu.category = !show_menu.category">
         <span class="fs-4"
           >Danh mục <i class="fa-solid fa-angle-down"></i
         ></span>
         <div class="border"></div>
       </div>
 
-      <div class="wrapper">
+      <div class="wrapper" v-show="show_menu.category">
         <button
           type="button"
           style="margin: 10px 10px 0px 0px"
@@ -26,12 +26,12 @@
     </div>
 
     <div class="menu-filter mt-5">
-      <div class="content">
+      <div class="content" @click="show_menu.origin = !show_menu.origin">
         <span class="fs-4">Xuất xứ <i class="fa-solid fa-angle-down"></i></span>
         <div class="border"></div>
       </div>
 
-      <div class="wrapper">
+      <div class="wrapper" v-show="show_menu.origin">
         <button
           type="button"
           style="margin: 10px 10px 0px 0px"
@@ -49,12 +49,12 @@
     </div>
 
     <div class="menu-filter mt-5">
-      <div class="content">
+      <div class="content" @click="show_menu.embargo = !show_menu.embargo">
         <span class="fs-4">Cấm vận <i class="fa-solid fa-angle-down"></i></span>
         <div class="border"></div>
       </div>
 
-      <div class="wrapper">
+      <div class="wrapper" v-show="show_menu.embargo">
         <button-embargo-item
           v-for="item in embargo_list"
           :key="item.id"
@@ -79,6 +79,11 @@ export default defineComponent({
   components: { ButtonEmbargoItem },
   data() {
     return {
+      show_menu:{
+        category: true,
+        origin: true,
+        embargo: true,
+      },
       embargo_list: [
         { name: "Hàng hóa đặc biệt", id: "special" },
         { name: "Giấy phép riêng", id: "private_license" },
@@ -91,19 +96,9 @@ export default defineComponent({
   created() {
     setTimeout(() => {
       categoryStore().getCategories();
-    }, 1000);
+    }, 2000);
     originStore().getOriginList();
   },
-
-  // watch: {
-  //   filter: {
-  //     immediate: true,
-  //     deep: true,
-  //     handler(new_temp) {
-  //       alert("hdhdhdhd");
-  //     },
-  //   },
-  // },
 
   computed: {
     category_list() {
@@ -138,6 +133,7 @@ span {
 }
 .content {
   padding-bottom: 5px;
+  cursor: pointer;
 }
 .border {
   margin: 5px 0px;

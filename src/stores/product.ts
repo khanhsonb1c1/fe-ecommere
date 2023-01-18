@@ -27,6 +27,37 @@ export const productStore = defineStore({
         filter_name: {} as any,
         current_page: 1 as number,
         last_page: 0 as number,
+
+        product_detail: {
+            hs_code: '' ,
+            id: '' as string,
+            category: {
+                name: '',
+                id: '',
+                parent_id: '',
+            },
+            origin: {
+                name: '',
+            },
+            image_url: '',
+            name: '',
+            created_at: 0 ,
+            updated_at: 0 ,
+            quantity_items: 0,
+            price: 0,
+            ingredients: '',
+            tax_percent: 0,
+            width: 0,
+            length: 0,
+            height: 0,
+            weight: 0,
+            special: false,
+            private_license: false,
+            banned_export: false,
+            banned_air: false,
+            banned_sea: false,
+            
+        },
     }),
     getters: {
         filter(state) {
@@ -65,9 +96,29 @@ export const productStore = defineStore({
             });
         },
 
-        updateSort(value: string){
+        getProductDetail(id: string) {
+            return new Promise((resolve, reject) => {
+                products.getProductDetail(id, {
+                    include: 'suppliers,origin,category,origin',
+                }).then(res => {
+                    this.product_detail = res.data
+                    resolve(res.data)
+                }).catch(err => {
+                    reject(err)
+                })
+
+            });
+        },
+
+
+        updateSort(value: string) {
             this.sort = value;
             this.getProductList(this.current_page)
+        },
+
+        updateNameSearchFilter(id: string, value: string) {
+            this.filter_b.name = id;
+            this.filter_name.name = value;
         },
 
         updateCategoryFilter(id: string, value: string) {

@@ -45,8 +45,11 @@
         <div class="row align-items-center">
           <div class="col-lg-3 col-md-3 col-7">
             <!-- Start Header Logo -->
-            <a class="navbar-brand" href="index.html">
-              <img src="../../assets/logo/logo.png" alt="Logo" />
+            <a class="navbar-brand" >
+              <router-link to="/home">
+                <img src="../../assets/logo/logo.png" alt="Logo" />
+              </router-link>
+              
             </a>
             <!-- End Header Logo -->
           </div>

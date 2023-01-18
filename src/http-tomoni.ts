@@ -1,9 +1,9 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig } from "axios";
- import { useAuthStore } from "./stores/auth";
+import { useAuthStore } from "./stores/auth";
 
 async function defaultHeaders() {
   const defaultHeaders = {
-   "X-Firebase-IDToken": await useAuthStore().getIdToken(),
+    "X-Firebase-IDToken": await useAuthStore().getIdToken(),
     "Accept-Language": import.meta.env.VITE_APP_LANGUAGE,
     Accept: "application/json",
     "X-Organization-Scope": import.meta.env.VITE_APP_ORGANIZATION,

@@ -7,7 +7,7 @@
           <a class="btn"><i class="lni lni-cart"></i>Mua ngay</a>
         </div>
       </div>
-      <div class="product-info">
+      <div class="product-info" @click="redirectToDetail">
         <span class="category">{{ item?.category?.name || "..." }}</span>
         <h5 class="title">
           <a>{{ item?.name || "..." }}</a>
@@ -30,7 +30,11 @@ export default defineComponent({
     },
   },
 
-  computed: {},
+  methods:{
+    redirectToDetail(){
+      this.$router.push(`/product/${this.item?.id}`)
+    },
+  },
 });
 </script>
 
