@@ -102,10 +102,10 @@ export const cartStore = defineStore({
         },
 
         deleteItem() {
-            
+
         },
 
-        clearCart(){
+        clearCart() {
             localStorage.removeItem("cart");
         },
 
@@ -140,14 +140,14 @@ export const cartStore = defineStore({
                     );
                     data = { ...data, ...productItem };
                 });
-                orders.createOder({
+                orders.create({
                     ...data
                 }).then(res => {
                     console.log('thanh cong', res);
                     this.cart = [];
                     localStorage.setItem("cart", JSON.stringify(this.cart));
                     resolve(this.cart)
-                }).catch(err =>{
+                }).catch(err => {
                     reject(err)
                 })
 
