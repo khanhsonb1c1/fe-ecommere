@@ -1,6 +1,6 @@
 <template>
   <div class="col-lg-3 col-md-6 col-12">
-    <div class="single-product">
+    <div :class="[filter==false?'single-product-height':'','single-product']">
       <div class="product-image">
         <img :src="item?.image_url" />
         <div class="button">
@@ -28,6 +28,10 @@ export default defineComponent({
       type: Object,
       requied: false,
     },
+    filter: {
+      type: Boolean,
+      default: true,
+    }
   },
 
   methods:{
@@ -50,6 +54,11 @@ export default defineComponent({
 .single-product{
   height: 4in;
 }
+
+.single-product-height{
+  height: 5in !important;
+}
+
 .single-product .product-info{
   padding: 0 !important;
 }
@@ -62,4 +71,5 @@ export default defineComponent({
   font-size: 14px !important;
   font-weight: 400 !important;
 }
+
 </style>

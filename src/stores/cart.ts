@@ -105,6 +105,10 @@ export const cartStore = defineStore({
             
         },
 
+        clearCart(){
+            localStorage.removeItem("cart");
+        },
+
         payment(shipment_info: any, items: []) {
             return new Promise((resolve, reject) => {
 
@@ -142,6 +146,9 @@ export const cartStore = defineStore({
                     console.log('thanh cong', res);
                     this.cart = [];
                     localStorage.setItem("cart", JSON.stringify(this.cart));
+                    resolve(this.cart)
+                }).catch(err =>{
+                    reject(err)
                 })
 
 

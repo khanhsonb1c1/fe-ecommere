@@ -2,14 +2,14 @@
   <section class="trending-product section">
     <div class="container">
       <div class="row">
-        <div class="col-3">
+        <div class="col-3" v-show="filter">
           <slot name="menu"></slot>
         </div>
-        <div class="col-9">
-          <div class="row">
+        <div :class="[filter ? 'col-9': 'col-12']">
+          <div class="row" v-show="filter">
             <slot name="sort"></slot>
           </div>
-          <div class="row">
+          <div class="row" v-show="filter">
             <ul class="nav" style="margin-left: 15px">
               <li class="nav-item" style="margin: 20px 5px">
                 <slot name="filter"></slot></li>
@@ -41,6 +41,11 @@ export default defineComponent({
       requied: true,
       default: "",
     },
+
+    filter:{
+      type: Boolean,
+      default: false,
+    }
   },
 });
 </script>

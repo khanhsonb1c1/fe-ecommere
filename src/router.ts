@@ -5,7 +5,8 @@ import HomePageVue from "./views/HomePage.vue";
 import ProductPage from "./views/ProductPage.vue";
 import ProductDetailPage from "./views/ProductDetailPage.vue";
 import LoginPage from './views/auth/LoginPage.vue';
-import CartPayment from './views/cart/CartPayment.vue'
+import CartPayment from './views/cart/CartPayment.vue';
+import ManagerPage from './views/auth/ManagerPage.vue'
 import { nextTick } from 'vue';
 
 const router = createRouter({
@@ -54,6 +55,16 @@ const router = createRouter({
       component: CartPayment,
       meta: {
         title: "Thanh toán",
+        authRequired: true,
+
+      },
+    },
+    {
+      path: "/user",
+      name: "user",
+      component: ManagerPage,
+      meta: {
+        title: "Khách hàng",
         authRequired: true,
 
       },

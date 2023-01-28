@@ -1,6 +1,6 @@
 <template>
   <Header />
-  <ProductList>
+  <ProductList :filter="true">
     <template #sort>
       <menu-sort />
     </template>

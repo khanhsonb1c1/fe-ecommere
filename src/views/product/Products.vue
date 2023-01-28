@@ -1,7 +1,8 @@
 <template>
-  <ProductList >
+  <ProductList>
     <template #item>
       <ProductCard
+        :filter="false"
         v-for="(product, index) in product_list"
         :key="index"
         :item="product"
@@ -41,11 +42,9 @@ export default defineComponent({
     product_list() {
       return productStore().product_list;
     },
-    last_page(){
+    last_page() {
       return productStore().last_page;
-    }
-
-
+    },
   },
 
   watch: {
