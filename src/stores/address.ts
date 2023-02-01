@@ -3,9 +3,11 @@ import { user_address } from "../services/auth";
 import _ from "lodash";
 
 export const addressStore = defineStore({
-  id: "address",
+   id: "address",
   state: () => ({
     isAddress: true,
+    loading: false,
+    err: '',
     address: [
       {
         id: "" as string,
@@ -25,6 +27,7 @@ export const addressStore = defineStore({
   },
   actions: {
     getAddress(id: string) {
+      this.loading = true;
       return new Promise((resolve, reject) => {
         user_address
           .get({
@@ -37,10 +40,13 @@ export const addressStore = defineStore({
             } else {
               this.isAddress = false;
             }
+            this.loading = false;
             resolve(this.address);
           })
           .catch((err) => {
-            reject(err);
+            this.loading = false;
+            this.err = err
+            reject(this.err);
           });
       });
     },

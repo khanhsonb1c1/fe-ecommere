@@ -6,7 +6,13 @@ import ProductPage from "./views/ProductPage.vue";
 import ProductDetailPage from "./views/ProductDetailPage.vue";
 import LoginPage from './views/auth/LoginPage.vue';
 import CartPayment from './views/cart/CartPayment.vue';
-import ManagerPage from './views/auth/ManagerPage.vue'
+import ManagerOrderPage from './views/auth/ManagerOrderPage.vue'
+import ManagerAddressPage from './views/auth/ManagerAddressPage.vue'
+import ManagerContractPage from './views/auth/ManagerContractPage.vue'
+import ManagerWalletPage from './views/auth/ManagerWalletPage.vue'
+import OrderDetail from "./components/auth/order/OrderDetail.vue"
+
+
 import { nextTick } from 'vue';
 
 const router = createRouter({
@@ -60,16 +66,57 @@ const router = createRouter({
       },
     },
     {
-      path: "/user",
-      name: "user",
-      component: ManagerPage,
+      path: "/user/order",
+      name: "order",
+      component: ManagerOrderPage,
       meta: {
-        title: "Khách hàng",
+        title: "Danh sách đơn hàng",
+        authRequired: true,
+      },
+    },
+    {
+      path: "/user/order/:id",
+      name: "order_detail",
+      component: OrderDetail,
+      meta: {
+        title: "Chi tiết đơn hàng",
         authRequired: true,
 
       },
     },
-    
+
+    {
+      path: "/user/address",
+      name: "address",
+      component: ManagerAddressPage,
+      meta: {
+        title: "Địa chỉ",
+        authRequired: true,
+
+      },
+    },
+    {
+      path: "/user/contract",
+      name: "contract",
+      component: ManagerContractPage,
+      meta: {
+        title: "Hợp đồng",
+        authRequired: true,
+
+      },
+    },
+    {
+      path: "/user/wallet",
+      name: "wallet",
+      component: ManagerWalletPage,
+      meta: {
+        title: "Ví tài khoản",
+        authRequired: true,
+
+      },
+    },
+
+
   ],
 });
 

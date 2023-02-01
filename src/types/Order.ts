@@ -23,8 +23,23 @@ export default interface Order {
             id: string | '';
 
         };
-
     },
+
+    related_trackings:[
+        {
+            code: string | '';
+            updated_at: number | 0;
+            received: boolean | undefined;
+
+        }
+    ];
+
+    type:{
+        name: string | '';
+    },
+    cod_cost: number | 0;
+    additional_cost: number | 0;
+    purchase_cost: number | 0;
     shipment_method_id: string | "";
     service_fee: number | 0;
     service_fee_currency_id: string;
@@ -53,7 +68,6 @@ export default interface Order {
     status: {
         name: string | "";
     };
-    cod_cost: number | 0;
     contract_id: string | "";
     owning_boxes_from_origin: [
         {

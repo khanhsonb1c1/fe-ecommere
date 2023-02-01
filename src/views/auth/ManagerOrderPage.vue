@@ -19,6 +19,7 @@
       </div>
     </template>
   </CustomerManager>
+  <Loading v-show="loading"/>
 </template>
 
 <script lang="ts">
@@ -26,10 +27,11 @@ import { defineComponent } from "vue";
 import CustomerManager from "../../components/container/layout/CustomerManager.vue";
 import { orderStore } from "../../stores/order";
 import OrderTableItem from "../../components/auth/order/OrderTableItem.vue";
+// import Loading from "../../components/container/animation/Loading.vue";
 export default defineComponent({
   data() {
     return {
-      column: ["...", "Mã đơn", "Sản phẩm", "Trạng thái", "Loại", "Ngày tạo"],
+      column: ["...", "Mã đơn", "Sản phẩm", "Trạng thái", "Loại đơn", "Ngày tạo"],
     };
   },
 
@@ -40,6 +42,9 @@ export default defineComponent({
   computed: {
     order_list() {
       return orderStore().order_list;
+    },
+    loading(){
+      return orderStore().loading;
     },
   },
 

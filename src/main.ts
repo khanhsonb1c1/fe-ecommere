@@ -5,12 +5,11 @@ import { createPinia } from "pinia";
 import VueAxios from "vue-axios";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-// import router from "./router";
 import VueLodash from "vue-lodash";
 import { useAuthStore } from "./stores/auth";
 import router from "./router";
-
-
+import Loading from './components/container/animation/Loading.vue'
+// import { addressStore } from './stores/address';
 
 
 const firebaseConfig = {
@@ -42,8 +41,6 @@ getAuth().onIdTokenChanged((user) => {
   }
 });
 
-  
-
 const app = createApp(App);
 
 app.use(VueLodash);
@@ -53,5 +50,7 @@ app.use(createPinia());
 app.use(VueAxios, axios);
 
 app.use(router);
+
+app.component('Loading', Loading);
 
 app.mount("#app");

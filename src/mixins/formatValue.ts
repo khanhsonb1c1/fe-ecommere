@@ -24,12 +24,17 @@ export const formatValueMinxin = {
         const val = (value / 1).toFixed().replace(".", ",");
         return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")+' ¥';
       },
+      formatPrice2(value: number) {
+        const val = (value / 1).toFixed().replace(".", ",");
+        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      },
   
-      // getPrice(value: number, currency: string) {
-      //   return `${this.formatPrice(value)} ${
-      //     currency == "VND" ? "đ" : currency == "JPY" ? "¥" : currency
-      //   }`;
-      // },
+      formatPriceAndCheck(value: number, currency: string) {
+        const val = (value / 1).toFixed().replace(".", ",");
+        return `${val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} ${
+          currency == "VND" ? "đ" : currency == "JPY" ? "¥" : currency
+        }`;
+      },
   
       getVolume(value: number) {
         return value / 1000000;

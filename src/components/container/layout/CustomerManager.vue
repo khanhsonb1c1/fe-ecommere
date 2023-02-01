@@ -1,83 +1,27 @@
 <template>
-  <header>
-    <nav
-      id="sidebarMenu"
-      class="collapse d-lg-block sidebar collapse"
-      style="background: #3c4b64"
-    >
-      <div class="position-sticky">
-        <div class="list-group list-group-flush mx-3 mt-4">
-          <a class="list-group-item list-group-item-action py-2 ripple">
-            <i class="far fa-user fa-fw me-3"></i><span>Thông tin</span>
-          </a>
-
-          <a class="list-group-item list-group-item-action py-2 ripple"
-            ><i class="fas fa-chart-line fa-fw me-3"></i
-            ><span>Sổ địa chỉ</span></a
-          >
-          <a class="list-group-item list-group-item-action py-2 ripple">
-            <i class="fas fa-wallet fa-fw me-3"></i><span>Ví tài khoản</span>
-          </a>
-          <a class="list-group-item list-group-item-action py-2 ripple"
-            ><i class="fas fa-list fa-fw me-3"></i><span>Đơn hàng</span></a
-          >
-          <a class="list-group-item list-group-item-action py-2 ripple"
-            ><i class="fas fa-file-contract fa-fw me-3"></i
-            ><span>Hợp đồng</span></a
-          >
-          <a class="list-group-item list-group-item-action py-2 ripple"
-            ><i class="fas fa-home fa-fw me-3"></i><span>Trang chủ</span></a
-          >
-        </div>
-      </div>
-    </nav>
-    <!-- Sidebar -->
-
-    <!-- Navbar -->
-    <nav id="main-navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
-      <!-- Container wrapper -->
-      <div class="container-fluid">
-        <!-- Toggle button -->
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-mdb-toggle="collapse"
-          data-mdb-target="#sidebarMenu"
-          aria-controls="sidebarMenu"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <i class="fas fa-bars"></i>
-        </button>
-
-        <!-- Brand -->
-        <a class="navbar-brand" href="#">
-          <img
-            style="margin-left: 20px"
-            src="../../../assets/logo/logo.png"
-            height="40"
-            loading="lazy"
-          />
-        </a>
-      </div>
-      <!-- Container wrapper -->
-    </nav>
-    <!-- Navbar -->
-  </header>
-
+  <side-bar></side-bar>
   <main>
     <div class="container pt-4">
+      <slot name="order_detail"></slot>
       <slot name="order"></slot>
+      <slot name="address"></slot>
+      <slot name="wallet"></slot>
+      <slot name="contract"></slot>
+      <slot name="infomation"></slot>
     </div>
   </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-export default defineComponent({});
+import SideBar from "../menu/SideBar.vue";
+export default defineComponent({
+  components: { SideBar },
+});
 </script>
 
 <style scoped>
+
 @media (min-width: 991.98px) {
   main {
     padding-left: 240px;
