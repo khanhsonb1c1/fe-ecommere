@@ -1,6 +1,6 @@
 <template>
   <nav aria-label="Page navigation example">
-    <ul class="pagination mt-5">
+    <ul class="pagination mt-5 mb-5">
       <li class="page-item" @click="onClickFirstPage">
         <a class="page-link">Trang đầu</a>
       </li>

@@ -35,6 +35,7 @@ export const useAuthStore = defineStore({
     verified: (state) => state.me?.emailVerified,
     getUser_info: (state) => state.user_info,
     get_id_user: (state) => state.user_info?.id,
+    get_id_token: (state) => state.idToken,
   },
   actions: {
     getUserInfo() {
@@ -59,7 +60,7 @@ export const useAuthStore = defineStore({
         signInWithEmailAndPassword(getAuth(), email, password)
           .then(() => {
             this.me = getAuth().currentUser;
-            
+
             resolve(this.me);
           })
           .catch((error) => {
@@ -104,11 +105,13 @@ export const useAuthStore = defineStore({
       });
     },
 
+
     async getIdToken() {
       await getAuth()
         .currentUser?.getIdToken()
         .then((token) => {
           useAuthStore().idToken = token;
+
         });
       return useAuthStore().idToken;
     },

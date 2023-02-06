@@ -1,21 +1,18 @@
 <template>
-  <ProductList>
-    <template #item>
-      <ProductCard
-        :filter="false"
-        v-for="(product, index) in product_list"
-        :key="index"
-        :item="product"
-      />
+  <SiderBarFilter >
+    <template #sort>
+      <menu-sort></menu-sort>
+    </template>
+    <template #product>
+      <ProductCard v-for="(product, index) in product_list" :key="index" :item="product" />
     </template>
     <template #pagination>
-      <Pagination
-        :total-pages="last_page"
+      <Pagination :total-pages="last_page"
         :current-page="page"
-        @pagechanged="onPageChange"
-      />
+        @pagechanged="onPageChange"/>
     </template>
-  </ProductList>
+  </SiderBarFilter>
+  <Loading v-show="loading"/>
 </template>
 
 <script lang="ts">
@@ -24,9 +21,13 @@ import ProductCard from "../../components/container/card/ProductCard.vue";
 import ProductList from "../../components/container/layout/ProductList.vue";
 import Pagination from "../../components/container/pagination/Pagination.vue";
 import { productStore } from "../../stores/product";
+import SiderBarFilter from '../../components/container/menu/SIdeBarFilter.vue'
+import MenuSort from "../../components/container/menu/MenuSort.vue";
+import Loading from "../../components/container/animation/Loading.vue";
+import { mapState } from "pinia";
 
 export default defineComponent({
-  components: { ProductList, ProductCard, Pagination },
+  components: { ProductList, ProductCard, Pagination ,SiderBarFilter, MenuSort, Loading},
 
   data() {
     return {
@@ -39,12 +40,7 @@ export default defineComponent({
   },
 
   computed: {
-    product_list() {
-      return productStore().product_list;
-    },
-    last_page() {
-      return productStore().last_page;
-    },
+    ...mapState(productStore, ['product_list', 'last_page', 'loading'])
   },
 
   watch: {
@@ -66,4 +62,3 @@ export default defineComponent({
 });
 </script>
 
-ProductCard

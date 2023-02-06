@@ -1,20 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./src/assets/css/main.css">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>e-commere</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-    <!-- <script type="module" src="/src/assets/js/glightbox.min.js"></script> -->
-    <script type="module" src="/src/assets/js/bootstrap.min.js"></script>
-    <script type="module" src="/src/assets/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="/src/assets/js/custom.js"></script>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./src/assets/css/main.css" />
+
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+            integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <title>e-commere</title>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type="module" src="/src/main.ts"></script>
+        <script type="module" src="/src/assets/js/main.js"></script>
+        <script type="module" src="/src/assets/js/bootstrap.min.js"></script>
+        <script
+            type="module"
+            src="/src/assets/js/bootstrap.bundle.min.js"
+        ></script>
+        <script type="module" src="/src/assets/js/custom.js"></script>
+
+        <script>
+            function toggleSidebar() {
+                var x = document.getElementById("sidebar");
+                if (x.style.left === "-1000px") {
+                    x.style.left = "0";
+                    x.style.transition = "0.9s";
+                } else {
+                    x.style.left = "-1000px";
+                    x.style.transition = "0.9s";
+                }
+            }
+        </script>
+    </body>
 </html>

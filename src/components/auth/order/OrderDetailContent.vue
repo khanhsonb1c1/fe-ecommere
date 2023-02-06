@@ -21,11 +21,11 @@
           ><i class="fas fa-bars fa-fw me-2"></i>Nhật ký</a
         >
       </li>
-      <li class="nav-item" @click="handleClick(4)">
+      <!-- <li class="nav-item" @click="handleClick(4)">
         <a :class="[tab == 4 ? 'active' : '', 'nav-link']"
           ><i class="fas fa-history fa-fw me-2"></i>Lịch sử giao dịch</a
         >
-      </li>
+      </li> -->
     </ul>
   </div>
   <div class="content">

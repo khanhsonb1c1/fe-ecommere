@@ -1,6 +1,6 @@
 <template>
   <div class="card-body d-flex justify-content-between flex-wrap flex-row">
-    <div>
+    <div class="w-75">
       <span class="badge bg-secondary">{{ log?.creator.name }}</span>
       <span
         :class="[

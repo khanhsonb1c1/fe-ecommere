@@ -15,7 +15,7 @@
                   <div class="user">
                     <!-- <i class="lni lni-user"></i> -->
 
-                    <router-link to="/auth"
+                    <router-link to="/user/order"
                       ><i class="lni lni-user"></i>
                       {{ me?.displayName }}</router-link
                     >
@@ -179,9 +179,9 @@
               <span class="cat-button"
                 ><i class="lni lni-menu"></i>All Categories</span
               >
-              <ul class="sub-category">
+              <!-- <ul class="sub-category">
                 <li>
-                  <a href="product-grids.html"
+                  <a 
                     >Electronics <i class="lni lni-chevron-right"></i
                   ></a>
                   <ul class="inner-sub-category">
@@ -208,7 +208,7 @@
                 <li><a href="product-grids.html">Computers & Tablets </a></li>
                 <li><a href="product-grids.html">Video Games </a></li>
                 <li><a href="product-grids.html">Home Appliances </a></li>
-              </ul>
+              </ul> -->
             </div>
             <!-- End Mega Category Menu -->
             <!-- Start Navbar -->

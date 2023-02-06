@@ -4895,3 +4895,55 @@ top: 2px;
     display: none;
   }
 }
+
+.btn-white{
+  background-color: #fff !important;
+}
+
+.card-footer{
+  background-color: #fffefb !important;
+}
+.border-gray{
+  /* background-color: #dee2e6 !important; */
+  border: 1px solid #dee2e6 !important
+}
+
+.color-orgin{
+  color: #E14D2A;
+}
+
+.color-primary{
+  color: #0167F3 !important;
+}
+
+.color-dark{
+  color: #333;
+}
+.color-danger{
+  color: #F99417 !important;
+}
+.body{
+  background: #f1f1f1;
+  min-height: 100vh;
+}
+
+.tabs{
+  background-color: #fff !important;
+  padding-top: 2px;
+}
+
+.card-default{
+  height: 18rem;
+  overflow: hidden;
+  
+  
+}
+
+.card-show{
+  height: auto !important;
+}
+
+footer{
+  background-color: #3c4b64 !important;
+}
+

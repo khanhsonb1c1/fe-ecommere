@@ -10,7 +10,7 @@ const orders = {
     return order.get(`/api/orders/${id}`, { params });
   },
   get_all(params?: object) {
-    return order.get(`/api/orders`, { params });
+    return order.get(`/api/orders/retail`, { params });
   },
   get_order_items(params?: object) {
     return order.get(`/api/orders/items`, { params });

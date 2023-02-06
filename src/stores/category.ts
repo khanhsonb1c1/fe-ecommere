@@ -21,7 +21,11 @@ export const categoryStore = defineStore({
     actions: {
         getCategories() {
             return new Promise((resolve, reject) => {
-                categories.getCategory().then(res => {
+                categories.getCategory({
+                    [`filter[root]`]: 1,
+                    include: 'children'
+
+                }).then(res => {
                     this.category_list = res.data;
                     resolve(res.data)
                 }).catch(err => {

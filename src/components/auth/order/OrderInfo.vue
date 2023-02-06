@@ -1,106 +1,11 @@
 <template>
   <div>
     <div class="card">
-      <div class="card-header">{{ order.id }}</div>
       <div class="card-body">
         <div class="row mb-4">
-          <div class="col-sm-12 col-md-6 col-xl-4">
-            <div class="mb-3">
-              <div style="font-weight: 500; color: #3c4b64">
-                <div class="text-uppercase text-left mb-2">Chi tiết</div>
-              </div>
-              <div class="row p-1">
-                <div class="col-7 title"><span>Mã đơn</span></div>
-                <div class="col-5">
-                  <p>{{ order?.id }}</p>
-                </div>
-              </div>
-              
-              <div class="row p-1">
-                <div class="col-7 title"><span>Trạng thái</span></div>
-                <div class="col-5">
-                  <p>
-                    <status-order :status="order?.status?.name" />
-                  </p>
-                </div>
-              </div>
-              <div class="row p-1">
-                <div class="col-7 title">
-                  <span>Phương thức vận chuyển</span>
-                </div>
-                <div class="col-5">
-                  <p><ship-method /></p>
-                </div>
-              </div>
-              <div class="row p-1">
-                <div class="col-7 title"><span>Ghi chú</span></div>
-                <div class="col-5">
-                  <p>{{ order?.note || "..." }}</p>
-                </div>
-              </div>
-              <div class="row p-1">
-                <div class="col-7 title"><span>Ngày tạo</span></div>
-                <div class="col-5">
-                  <p>{{ formatTime(order?.created_at) }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
           <!-- ========================== -->
 
-          <div class="col-sm-12 col-md-6 col-xl-4">
-            <div class="mb-3">
-              <div style="font-weight: 500; color: #3c4b64">
-                <div class="text-uppercase text-left mb-2">Chi phí</div>
-              </div>
-              <div class="row p-1">
-                <div class="col-7 title"><span>Tiền hàng</span></div>
-                <div class="col-5">
-                  <p>{{ formatPrice(order?.purchase_cost) }}</p>
-                </div>
-              </div>
-              <div class="row p-1">
-                <div class="col-7 title"><span>Phí dịch vụ</span></div>
-                <div class="col-5">
-                  <p>
-                    {{
-                      formatPriceAndCheck(
-                        order?.service_fee,
-                        order?.service_fee_currency_id
-                      )
-                    }}
-                  </p>
-                </div>
-              </div>
-
-              <div class="row p-1">
-                <div class="col-7 title"><span>Phụ phí</span></div>
-                <div class="col-5">
-                  <p>{{ formatPrice(order?.additional_cost) }}</p>
-                </div>
-              </div>
-              <div class="row p-1">
-                <div class="col-7 title">
-                  <span>Phí giao hàng nội địa</span>
-                </div>
-                <div class="col-5">
-                  <p>
-                    {{
-                      formatPriceAndCheck(
-                        order?.cod_cost,
-                        order?.service_fee_currency_id
-                      )
-                    }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- ========================== -->
-
-          <div class="col-sm-12 col-md-6 col-xl-4">
+          <div class="col-sm-12 col-md-12 col-xl-6 border-end">
             <div class="mb-3">
               <div style="font-weight: 500; color: #3c4b64">
                 <div class="text-uppercase text-left mb-2">Giao hàng</div>
@@ -143,6 +48,11 @@
               </div>
             </div>
           </div>
+
+          <!-- ============== -->
+          <Journey />
+
+          <!-- ============== -->
         </div>
       </div>
     </div>
@@ -165,12 +75,46 @@
           <div class="card-body" style="padding: 0.5rem 1rem">
             <h6 class="card-title">{{ item.product.name }}</h6>
             <p class="card-text">Số lượng: {{ item.quantity }}</p>
-            <p class="card-text">
-              Tổng giá: {{ formatPrice(item.balance) }}
-            </p>
+            <p class="card-text">Tổng giá: {{ formatPrice(item.balance) }}</p>
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- ====================== -->
+
+    <div class="card-footer text-muted">
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-xl-8"></div>
+        <div class="col-sm-12 col-md-6 col-xl-4">
+          <div class="mb-3">
+            <div class="price d-flex flex-wrap justify-content-between align-items-center">
+              <div>
+                <i class="fas fa-shopping-cart color-danger fs-6"></i>
+              <span class="ms-2" style="color: #333">Tiền hàng: </span>
+              </div>
+              
+              <span class="fs-5 ms-2 color-orgin">{{ formatPrice(order?.purchase_cost) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-xl-8"></div>
+        <div class="col-sm-12 col-md-6 col-xl-4">
+          <div class="mb-3">
+            <div class="price d-flex flex-wrap justify-content-between align-items-center">
+              <div><i class="fas fa-truck color-primary"></i>
+              <span class="ms-2" style="color: #333">Phí dịch vụ: </span></div>
+              
+              <span class="fs-5 ms-2 color-orgin ">{{  formatPrice2(order?.service_fee)  }} đ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+   
     </div>
   </div>
 </template>
@@ -182,10 +126,12 @@ import { orderStore } from "../../../stores/order";
 import StatusOrder from "../../container/output/StatusOrder.vue";
 import _ from "lodash";
 import ShipMethod from "../../container/output/ShipMethod.vue";
+import Journey from "./Journey.vue";
 
 export default defineComponent({
-  components: { StatusOrder, ShipMethod },
+  components: { StatusOrder, ShipMethod, Journey },
   mixins: [formatValueMinxin],
+
   computed: {
     order() {
       return orderStore().get_order_detail;
@@ -194,15 +140,10 @@ export default defineComponent({
     items() {
       return orderStore().get_items;
     },
+  },
 
-    get_tracking() {
-      const lg = this.order.related_trackings;
-      if (_.isEmpty(lg)) {
-        return "...";
-      } else {
-        return this.order.related_trackings[0].code;
-      }
-    },
+  methods: {
+    getJourney() {},
   },
 });
 </script>
@@ -213,4 +154,6 @@ export default defineComponent({
   font-weight: 700;
   font-size: 1.1em;
 }
+
+
 </style>

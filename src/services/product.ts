@@ -12,8 +12,8 @@ const products = {
 };
 
 const categories = {
-  getCategory() {
-    return product.get(`/api/categories?include=parent`);
+  getCategory(params: object) {
+    return product.get(`/api/categories`, {params});
   },
 };
 
@@ -21,9 +21,6 @@ const origins = {
   getOrigin() {
     return product.get(`/api/origins`);
   },
-  // getOriginDetail(id:string, params: object) {
-  //   return product.get(`/api/origins/${id}`,{ params });
-  // },
 };
 
 

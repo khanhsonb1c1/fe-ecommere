@@ -1,95 +1,75 @@
 <template>
-  <header>
-    <nav
-      id="sidebarMenu"
-      class="collapse d-lg-block sidebar collapse"
-      style="background: #3c4b64"
-    >
-      <div class="position-sticky">
-        <div class="list-group list-group-flush mx-3 mt-4">
-          <a
-            class="list-group-item list-group-item-action py-2 ripple"
-            :class="{ active: tab == 'infomation' }"
-            @click="setTab()"
-          >
-            <i class="far fa-user fa-fw me-3"></i><span>Thông tin</span>
-          </a>
+  <HeaderTop />
+  <header-mid />
+  <div class="container d-flex">
+    <div class="sidebar pt-4">
+      <div class="card pt-2 pb-5" style="width: 18rem">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="card mb-3 border-bottom pb-3 ">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img
+                    src="https://lh3.googleusercontent.com/a-/AFdZucpoGXtbJB1EiTnKJRffyubxo_QNvclkIhPk1NQwUg=s96-c"
+                    class="img-fluid rounded-start"
+                    alt="..."
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h6 class="card-title">Đỗ Khánh Sơn</h6>
+                    <p class="card-text">IT support</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <router-link to="/user/infomation">
+            <li class="list-group-item">
+              <i class="far fa-user fa-fw me-3"></i>
+              <span>Tài khoản của tôi</span>
+            </li>
+          </router-link>
+          <router-link to="/user/order">
+            <li class="list-group-item">
+              <i class="fas fa-list fa-fw me-3"></i>
+              <span>Đơn hàng</span>
+            </li>
+          </router-link>
           <router-link to="/user/address">
-            <a
-              class="list-group-item list-group-item-action py-2 ripple"
-              :class="{ active: tab == 'address' }"
-              @click="setTab()"
-              ><i class="fas fa-chart-line fa-fw me-3"></i
-              ><span>Sổ địa chỉ</span></a
-            >
+            <li class="list-group-item">
+              <i class="fas fa-map-marked-alt fa-fw me-3"></i>
+              <span>Địa chỉ</span>
+            </li>
           </router-link>
           <router-link to="/user/wallet">
-            <a
-              class="list-group-item list-group-item-action py-2 ripple"
-              :class="{ active: tab == 'wallet' }"
-              @click="setTab()"
-            >
-              <i class="fas fa-wallet fa-fw me-3"></i><span>Ví tài khoản</span>
-            </a>
-          </router-link>
-
-          <router-link to="/user/order">
-            <a
-              class="list-group-item list-group-item-action py-2 ripple"
-              :class="{ active: tab == 'order' }"
-              @click="setTab()"
-              ><i class="fas fa-list fa-fw me-3"></i><span>Đơn hàng</span></a
-            >
+            <li class="list-group-item">
+              <i class="fas fa-wallet fa-fw me-3"></i>
+              <span>Ví tài khoản</span>
+            </li>
           </router-link>
           <router-link to="/user/contract">
-            <a
-              class="list-group-item list-group-item-action py-2 ripple"
-              :class="{ active: tab == 'contract' }"
-              @click="setTab()"
-              ><i class="fas fa-file-contract fa-fw me-3"></i
-              ><span>Hợp đồng</span></a
-            >
+            <li class="list-group-item">
+              <i class="fas fa-file-contract fa-fw me-3"></i>
+              <span>Hợp đồng</span>
+            </li>
           </router-link>
-          <router-link to="/">
-            <a class="list-group-item list-group-item-action py-2 ripple"
-              ><i class="fas fa-home fa-fw me-3"></i><span>Trang chủ</span></a
-            >
-          </router-link>
-        </div>
+        </ul>
       </div>
-    </nav>
-    <nav id="main-navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
-      <div class="container-fluid">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-mdb-toggle="collapse"
-          data-mdb-target="#sidebarMenu"
-          aria-controls="sidebarMenu"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <i class="fas fa-bars"></i>
-        </button>
-
-        <!-- Brand -->
-        <a class="navbar-brand" href="#">
-          <img
-            style="margin-left: 20px"
-            src="../../../assets/logo/logo.png"
-            height="40"
-            loading="lazy"
-          />
-        </a>
-      </div>
-    </nav>
-  </header>
+    </div>
+    <div class="page-content w-100">
+      <slot name="content"> </slot>
+    </div>
+  </div>
 </template>
   
-  <script lang="ts">
+<script lang="ts">
 import { defineComponent } from "vue";
 import { menuStore } from "../../../stores/menu";
+import HeaderMid from "../../../views/header/HeaderMid.vue";
+import HeaderTop from "../../../views/header/HeaderTop.vue";
 export default defineComponent({
+  components: { HeaderTop, HeaderMid },
   data() {},
   computed: {
     tab() {
@@ -97,8 +77,8 @@ export default defineComponent({
     },
   },
 
-  mounted(){
-    this.setTab()
+  mounted() {
+    this.setTab();
   },
 
   methods: {
@@ -108,57 +88,53 @@ export default defineComponent({
   },
 });
 </script>
-  
+
 <style scoped>
-@media (min-width: 991.98px) {
-  main {
-    padding-left: 240px;
-  }
-}
-span {
-  font-size: medium !important;
-}
 .list-group-item {
-  background: none !important;
-  color: #fff;
-  margin: 10px 0px;
-  border: none !important;
+  border: none;
 }
 
-.list-group-item:hover {
-  border-radius: 5px;
-  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
-  background: rgba(49, 10, 245, 0.362) !important;
-}
-.sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  padding: 58px 0 0; /* Height of navbar */
-  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
-  width: 240px;
-  z-index: 600;
+.card {
+  border: none;
 }
 
-@media (max-width: 991.98px) {
-  .sidebar {
-    width: 100%;
-  }
-}
-.sidebar .active {
-  background: rgba(39, 17, 244, 0.541) !important;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgb(0 0 0 / 12%);
+img {
+  border-radius: 50% !important;
 }
 
-.sidebar-sticky {
-  position: relative;
-  top: 0;
-  height: calc(100vh - 48px);
-  padding-top: 0.5rem;
-  overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+a{
+  color: rgba(0,0,0,.87);
+  
+}
+span{
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+.fa-list {
+color: #0081B4;
+}
+.fa-user{
+  color: #0081B4;
+}
+.fa-map-marked-alt{
+  color: #E14D2A;
+}
+
+.fa-wallet{
+  color: #E14D2A;
+}
+
+.fa-file-contract{
+  color: #F1A661
+}
+.fa-fw{
+  font-size: 1.3em
+}
+
+span:hover{
+  color: #E14D2A;
 }
 </style>
   
+

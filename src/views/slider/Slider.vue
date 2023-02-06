@@ -1,8 +1,8 @@
 <template>
-  <div class="container mt-5">
+  <div class="container mt-2 ">
     <div
       id="carouselExampleIndicators"
-      class="carousel slide"
+      class="carousel slide pt-1"
       data-bs-ride="carousel"
     >
       <div class="carousel-indicators">

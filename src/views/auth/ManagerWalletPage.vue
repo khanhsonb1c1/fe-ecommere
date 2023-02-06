@@ -19,14 +19,13 @@
       </div>
     </template>
   </CustomerManager>
-  <Loading v-show="loading" />
+  <Loading />
 </template>
   
   <script lang="ts">
 import { defineComponent } from "vue";
 import CustomerManager from "../../components/container/layout/CustomerManager.vue";
 import { useAuthStore } from "../../stores/auth";
-import { orderStore } from "../../stores/order";
 import { accountingStore } from "../../stores/accounting";
 import WalletTableItem from "../../components/auth/wallet.vue/WalletTableItem.vue";
 import _ from "lodash";
@@ -55,9 +54,7 @@ export default defineComponent({
   },
 
   computed: {
-    loading() {
-      return orderStore().loading;
-    },
+
     id_user() {
       return useAuthStore().get_id_user;
     },

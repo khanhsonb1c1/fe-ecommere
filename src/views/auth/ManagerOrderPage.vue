@@ -1,52 +1,27 @@
 <template>
-  <CustomerManager>
-    <template #order>
-      <div>
-        <!-- <table class="table table-bordered">
-          <thead class="table-dark">
-            <tr>
-              <td v-for="(col, index) in column" :key="index">{{ col }}</td>
-            </tr>
-          </thead>
-          <tbody>
-            <OrderTableItem
-              v-for="(order, index) in order_list"
-              :key="index"
-              :item="order"
-            />
-          </tbody>
-        </table> -->
-        <OrderCard
-          v-for="(order, index) in order_list"
-          :key="index"
-          :item="order"
-        />
-      </div>
-    </template>
-  </CustomerManager>
-  <Loading v-show="loading" />
+  <div >
+    <CustomerManager>
+      <template #order>
+        <div>
+          <OrderCard
+            v-for="(order, index) in order_list"
+            :key="index"
+            :item="order"
+          />
+        </div>
+      </template>
+    </CustomerManager>
+    <Loading v-show="loading" />
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import CustomerManager from "../../components/container/layout/CustomerManager.vue";
 import { orderStore } from "../../stores/order";
-import OrderTableItem from "../../components/auth/order/OrderTableItem.vue";
 import OrderCard from "../../components/container/card/OrderCard.vue";
-// import Loading from "../../components/container/animation/Loading.vue";
+import Loading from "../../components/container/animation/Loading.vue";
 export default defineComponent({
-  data() {
-    return {
-      column: [
-        "...",
-        "Mã đơn",
-        "Sản phẩm",
-        "Trạng thái",
-        "Loại đơn",
-        "Ngày tạo",
-      ],
-    };
-  },
 
   mounted() {
     this.getOrderList();
@@ -67,6 +42,6 @@ export default defineComponent({
     },
   },
 
-  components: { CustomerManager, OrderTableItem, OrderCard },
+  components: { CustomerManager, OrderCard, Loading },
 });
 </script>

@@ -1,12 +1,14 @@
 <template>
-  <button
-    type="button"
-    style="margin: 10px 10px 0px 0px"
-    @click="handleFilterEmbargo(item.id)"
-    :class="[active == true ? 'active' : '', 'btn btn-outline-primary']"
-  >
-    {{ item.name }}
-  </button>
+  <div>
+    <input
+      class="form-check-input fs-6 me-3"
+      type="checkbox"
+      v-model="active"
+      @click="handleFilterEmbargo(item.id)"
+    />
+    <span class="">{{ item.name }}</span>
+  </div>
+
 </template>
   
 <script lang="ts">
@@ -38,10 +40,11 @@ export default defineComponent({
     filter: {
       deep: true,
       handler(newFilter) {
-        console.log(newFilter)
+        console.log(newFilter);
         this.checkEmbrago();
       },
     },
+
   },
 
   methods: {
@@ -70,4 +73,11 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+span {
+  font-weight: 600;
+  font-size: 1.1em;
+}
+</style>
   

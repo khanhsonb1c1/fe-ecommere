@@ -1,11 +1,14 @@
 <template>
-    
-  </template>
-  
-  <script lang="ts">
-  import { defineComponent } from "vue";
+  <div>sdkfsd</div>
+</template>
 
-  export default defineComponent({
-    
-  });
-  </script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+export default defineComponent({
+
+})
+</script>
+
+<style>
+
+</style>

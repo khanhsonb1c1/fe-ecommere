@@ -1,3 +1,4 @@
+
 import { createApp } from 'vue'
 import App from './App.vue'
 import axios from "axios";
@@ -9,7 +10,6 @@ import VueLodash from "vue-lodash";
 import { useAuthStore } from "./stores/auth";
 import router from "./router";
 import Loading from './components/container/animation/Loading.vue'
-// import { addressStore } from './stores/address';
 
 
 const firebaseConfig = {
@@ -22,7 +22,7 @@ const firebaseConfig = {
     measurementId: import.meta.env.VITE_APP_FIREBASE_MEASUREMENT_ID,
   };
 
-  initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 getAuth().onAuthStateChanged((user) => {
   useAuthStore().me = user;
@@ -40,6 +40,8 @@ getAuth().onIdTokenChanged((user) => {
     useAuthStore().idToken = "";
   }
 });
+
+
 
 const app = createApp(App);
 

@@ -7,9 +7,7 @@
     <template #filter>
       <ButtonLabelFilter />
     </template>
-    <template #menu>
-      <MenuFilter />
-    </template>
+   
     <template #item>
       <ProductCard
         v-for="product in product_list"
@@ -34,7 +32,6 @@ import ProductList from "../components/container/layout/ProductList.vue";
 import Pagination from "../components/container/pagination/Pagination.vue";
 import { productStore } from "../stores/product";
 import Header from "./header/Index.vue";
-import MenuFilter from "../components/container/menu/MenuFilter.vue";
 import MenuSort from "../components/container/menu/MenuSort.vue";
 import ButtonLabelFilter from "../components/container/button/ButtonLabelFilter.vue";
 
@@ -44,7 +41,7 @@ export default defineComponent({
     ProductCard,
     Pagination,
     Header,
-    MenuFilter,
+
     MenuSort,
     ButtonLabelFilter,
   },

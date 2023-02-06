@@ -29,7 +29,7 @@ export const productStore = defineStore({
         last_page: 0 as number,
 
         product_detail: {
-            hs_code: '' ,
+            hs_code: '',
             id: '' as string,
             category: {
                 name: '',
@@ -41,8 +41,8 @@ export const productStore = defineStore({
             },
             image_url: '',
             name: '',
-            created_at: 0 ,
-            updated_at: 0 ,
+            created_at: 0,
+            updated_at: 0,
             quantity_items: 0,
             price: 0,
             ingredients: '',
@@ -56,8 +56,10 @@ export const productStore = defineStore({
             banned_export: false,
             banned_air: false,
             banned_sea: false,
-            
+
         },
+
+        loading: true,
     }),
     getters: {
         filter(state) {
@@ -66,6 +68,7 @@ export const productStore = defineStore({
     },
     actions: {
         getProductList(page: number) {
+            this.loading = true;
             return new Promise((resolve, reject) => {
                 const filter_1 = lodash.mapKeys(this.filter_a, function (value, key) {
                     return `filter[${key}.id]`;
@@ -88,22 +91,29 @@ export const productStore = defineStore({
                     this.product_list = res.data.data;
                     this.current_page = res.data.current_page;
                     this.last_page = res.data.last_page;
-
+                    this.loading = false;
                     resolve(res.data.data)
                 }).catch((err) => {
+                    this.loading = false;
                     reject(err)
                 })
             });
         },
 
         getProductDetail(id: string) {
+            this.loading = true;
+
             return new Promise((resolve, reject) => {
                 products.getProductDetail(id, {
                     include: 'suppliers,origin,category,origin',
                 }).then(res => {
-                    this.product_detail = res.data
+                    this.product_detail = res.data;
+                    this.loading = false;
+
                     resolve(res.data)
                 }).catch(err => {
+                    this.loading = false;
+
                     reject(err)
                 })
 
@@ -130,68 +140,99 @@ export const productStore = defineStore({
             this.filter_name.origin = value;
         },
         updateSpecialFilter() {
-            this.filter_b.special = true
-            this.filter_name.special = true
+            if (this.filter_b.special == true) {
+                this.clearFilterSpecial()
+            } else {
+                this.filter_b.special = true
+                this.filter_name.special = true
+            }
+
         },
         updatePrivateLicenseFilter() {
-            this.filter_b.private_license = true
-            this.filter_name.private_license = true
+            if (this.filter_b.private_license == true) {
+                this.clearFilterPrivateLicense()
+            } else {
+                this.filter_b.private_license = true
+                this.filter_name.private_license = true
+            }
+
         },
         updateBannedExportFilter() {
-            this.filter_b.banned_export = true
-            this.filter_name.banned_export = true
+            if (this.filter_b.banned_export == true) {
+                this.clearFilterBannedExport()
+            } else {
+                this.filter_b.banned_export = true
+                this.filter_name.banned_export = true
+            }
+
         },
         updateBannedSeaFilter() {
-            this.filter_b.banned_sea = true;
-            this.filter_name.banned_sea = true;
+            if (this.filter_b.banned_sea == true) {
+                this.clearFilterBannedSea()
+            } else {
+                this.filter_b.banned_sea = true;
+                this.filter_name.banned_sea = true;
+            }
+
         },
         updateBannedAirFilter() {
-            this.filter_b.banned_air = true;
-            this.filter_name.banned_air = true;
+            if (this.filter_b.banned_air == true) {
+                this.clearFilterBannedAir()
+            } else {
+                this.filter_b.banned_air = true;
+                this.filter_name.banned_air = true;
+            }
         },
-        // updateEmbragoFilter(value: any) {
-        //     this.filter[`${value}`] = "true";
-        // },
+
 
         clearFilterCategory() {
             delete this.filter_a.category;
             delete this.filter_name.category;
+            delete this.filter.category;
             this.getProductList(this.current_page)
         },
         clearFilterOrigin() {
-            delete this.filter_a.origin;
+            delete this.filter_b.origin_id;
+            delete this.filter.origin;
             delete this.filter_name.origin;
             this.getProductList(this.current_page)
         },
         clearFilterSpecial() {
             delete this.filter_b.special;
             delete this.filter_name.special;
+            delete this.filter.special;
             this.getProductList(this.current_page)
         },
         clearFilterPrivateLicense() {
             delete this.filter_b.private_license;
             delete this.filter_name.private_license;
+            delete this.filter.private_license;
+
             this.getProductList(this.current_page)
         },
         clearFilterBannedExport() {
             delete this.filter_b.banned_export;
             delete this.filter_name.banned_export;
+            delete this.filter.banned_export;
             this.getProductList(this.current_page)
         },
         clearFilterBannedSea() {
             delete this.filter_b.banned_sea;
             delete this.filter_name.banned_sea;
+            delete this.filter.banned_sea;
             this.getProductList(this.current_page)
         },
         clearFilterBannedAir() {
             delete this.filter_b.banned_air;
             delete this.filter_name.banned_air;
+            delete this.filter.banned_air;
             this.getProductList(this.current_page)
         },
 
 
-        // clearAllFilter() {
-        //     this.filter = {}
-        // },
+        clearAllFilter() {
+            this.filter_a = {}
+            this.filter_b = {}
+        },
     },
 });
