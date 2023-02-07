@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-3 col-md-6 col-12">
+  <div :class="[filter == false ? 'col-lg-20':'col-lg-3',' col-md-6 col-12']">
     <div
       :class="[
         filter == false ? 'single-product-height' : '',
@@ -74,7 +74,7 @@ export default defineComponent({
 }
 
 .single-product-height {
-  height: 5in !important;
+  height: 3.6in !important;
 }
 
 .single-product .product-info {

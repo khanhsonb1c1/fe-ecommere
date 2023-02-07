@@ -9,10 +9,12 @@ export const categoryStore = defineStore({
             id: '' as string,
             name: '' as string,
             parent_id: '' as string,
-            parent: {
-                id: '' as string,
-                name: '' as string,
-            }
+            children: [
+                {
+                    id: '' as string,
+                    name: '' as string,
+                }
+            ]
         }]
     }),
     getters: {

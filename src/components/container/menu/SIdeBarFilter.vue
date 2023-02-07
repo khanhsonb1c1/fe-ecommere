@@ -2,31 +2,23 @@
   <div class="container d-flex">
     <div class="sidebar pt-2">
       <div class="card pt-2 pb-5 mb-3" style="width: 15rem">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <span class="color-dark mb-2">Danh mục</span>
-          </li>
-
-          <li
-            class="list-group-item"
-            v-for="(item, index) in categories"
-            :key="index"
-            @click="handleClickFilterCategory(item.id, item.name)"
-            
-          >
-            <i
-              :class="[
-                index == 0 || index == 1
-                  ? 'color-primary'
-                  : index == 2 || index == 3
-                  ? 'color-orgin'
-                  : 'color-danger',
-                'fas fa-tag fa-fw me-3',
-              ]"
-            ></i>
-            <span>{{ item.name }}</span>
-          </li>
+        <ul
+          :class="[
+            show_category ? 'card-show' : 'card-default',
+            'list-group list-group-flush ',
+          ]"
+        >
+        <CategoryItem  v-for="(item, index) in categories" :key="index" :item="item" :index="index"/>
         </ul>
+        <div
+          class="plus-list ps-3 mt-3"
+          @click="show_category = !show_category"
+        >
+          <span class="color-primary mb-2" style="font-size: 1em"
+            >Xem thêm</span
+          >
+          <i class="fas fa-chevron-down color-primary ms-2"></i>
+        </div>
       </div>
 
       <div class="card pt-2 pb-5 mb-3" style="width: 15rem">
@@ -52,7 +44,9 @@
                   ? 'color-primary'
                   : idx == 2 || idx == 3
                   ? 'color-orgin'
-                  : 'color-danger',
+                  : idx == 4 || idx == 5
+                  ? 'color-danger'
+                  : 'color-gray',
                 'fas fa-tag fa-fw me-3',
               ]"
             ></i>
@@ -75,23 +69,25 @@
             <span class="color-dark mb-2">Cấm vận</span>
           </li>
 
-          <li class="list-group-item" v-for="(item, idx) in embargo_list" :key="idx">
-            <ButtonEmbargoItem :item="item" :filter="filter"/>
+          <li
+            class="list-group-item"
+            v-for="(item, idx) in embargo_list"
+            :key="idx"
+          >
+            <ButtonEmbargoItem :item="item" :filter="filter" />
           </li>
         </ul>
       </div>
-      
     </div>
 
     <div class="page-content w-100 mt-2 ms-2">
       <slot name="sort"></slot>
       <slot name="label"></slot>
       <div class="row">
-         <slot name="product"> </slot>
-         <slot name="pagination"></slot>
-         <slot name="loading"></slot>
+        <slot name="product"> </slot>
+        <slot name="pagination"></slot>
+        <slot name="loading"></slot>
       </div>
-     
     </div>
   </div>
 </template>
@@ -104,12 +100,15 @@ import { originStore } from "../../../stores/orgin";
 import { productStore } from "../../../stores/product";
 import HeaderMid from "../../../views/header/HeaderMid.vue";
 import HeaderTop from "../../../views/header/HeaderTop.vue";
-import ButtonEmbargoItem from '../button/ButtonEmbargoItem.vue'
+import ButtonEmbargoItem from "../button/ButtonEmbargoItem.vue";
+import _ from "lodash";
+import CategoryItem from "./CategoryItem.vue";
 export default defineComponent({
-  components: { HeaderTop, HeaderMid, ButtonEmbargoItem },
+  components: { HeaderTop, HeaderMid, ButtonEmbargoItem, CategoryItem },
   data() {
     return {
       show_origin: false,
+      show_category: false,
       embargo_list: [
         { name: "Hàng hóa đặc biệt", id: "special" },
         { name: "Giấy phép riêng", id: "private_license" },
@@ -138,10 +137,8 @@ export default defineComponent({
   },
 
   created() {
-   
-      this.getCategories();
-      this.getOrigins();
-   
+    this.getCategories();
+    this.getOrigins();
   },
 
   mounted() {
@@ -165,15 +162,12 @@ export default defineComponent({
       // this.filter.origin = value;
       productStore().updateOriginFilter(id, value);
     },
-    handleClickFilterCategory(id: string, value: any) {
-      // this.filter.category = value;
-      productStore().updateCategoryFilter(id, value);
-    },
+    
   },
 });
 </script>
   
-  <style scoped>
+<style scoped>
 .list-group-item {
   border: none;
 }
@@ -190,23 +184,6 @@ span {
   font-size: 1.1em;
 }
 
-.fa-list {
-  color: #0081b4;
-}
-.fa-user {
-  color: #0081b4;
-}
-.fa-map-marked-alt {
-  color: #e14d2a;
-}
-
-.fa-wallet {
-  color: #e14d2a;
-}
-
-.fa-file-contract {
-  color: #f1a661;
-}
 .fa-fw {
   font-size: 1.3em;
 }
@@ -215,6 +192,6 @@ span:hover {
   color: #e14d2a;
 }
 </style>
-    
+      
   
   

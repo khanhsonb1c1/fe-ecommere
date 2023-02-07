@@ -1020,7 +1020,7 @@ top: -1px;
 }
 
 .section {
-  padding-top: 90px;
+  padding-top: 20px;
   padding-bottom: 90px;
   position: relative;
 }
@@ -4915,12 +4915,18 @@ top: 2px;
 .color-primary{
   color: #0167F3 !important;
 }
-
+ 
 .color-dark{
   color: #333;
 }
 .color-danger{
   color: #F99417 !important;
+}
+.color-gray{
+  color: #393E46 !important
+}
+.color-sliver{
+  color: #7B8FA1 !important;
 }
 .body{
   background: #f1f1f1;
@@ -4933,10 +4939,10 @@ top: 2px;
 }
 
 .card-default{
-  height: 18rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical; 
   overflow: hidden;
-  
-  
 }
 
 .card-show{
@@ -4945,5 +4951,15 @@ top: 2px;
 
 footer{
   background-color: #3c4b64 !important;
+}
+
+.col-lg-20{
+  width: 20% !important;
+}
+
+.view-more{
+  background-color: #fff;
+  padding: 15px 120px;
+  color: #333;
 }
 
