@@ -1,15 +1,15 @@
 <template>
   <div
-    class="modal fade"
-    id="formModal"
+    class="modal fade "
+    :id="id"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
+    aria-hidden="false"
   >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title text-uppercase" id="exampleModalLabel">{{ title }}</h5>
           <button
             type="button"
             class="btn-close"
@@ -17,16 +17,18 @@
             aria-label="Close"
           ></button>
         </div>
-        <div class="modal-body">...</div>
+        <div class="modal-body">
+          <slot name="form"></slot>
+        </div>
         <div class="modal-footer">
           <button
             type="button"
             class="btn btn-secondary"
             data-bs-dismiss="modal"
           >
-            Close
+            Hủy
           </button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button @click="handleClick()" type="button" class="btn btn-primary">Lưu</button>
         </div>
       </div>
     </div>
@@ -35,7 +37,28 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-export default defineComponent({});
+import _ from 'lodash'
+export default defineComponent({
+  props:{
+    id:{
+      type: String,
+      default: true,
+    },
+
+    title:{
+      type: String,
+      default: '',
+      requied: false,
+    }
+  },
+
+  methods: {
+    handleClick: _.debounce(function (this: any) {
+      this.$emit("handleSubmit");
+    }, 500),
+  },
+
+});
 </script>
 
 <style>

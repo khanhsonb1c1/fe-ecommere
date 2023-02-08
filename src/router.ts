@@ -124,21 +124,23 @@ router.beforeEach((routeTo, routeFrom, next) => {
   const authRequired = routeTo.matched.some((route) => route.meta.authRequired);
   if (!authRequired) {
     return next();
+  } else {
+    useAuthStore()
+      .authenticate()
+      .then(() => {
+
+        if (_.isEmpty(useAuthStore().user_info.id)) {
+          useAuthStore().getUserInfo();
+        }
+
+        return next();
+      })
+      .catch(() => {
+        router.push({ path: "/login" });
+      });
   }
 
-  useAuthStore()
-    .authenticate()
-    .then(() => {
 
-      if (_.isEmpty(useAuthStore().user_info.id)) {
-        useAuthStore().getUserInfo();
-      }
-
-      return next();
-    })
-    .catch(() => {
-      router.push({ path: "/login" });
-    });
 });
 
 router.afterEach((to) => {

@@ -49,22 +49,7 @@
                             </div>
                             <!-- End Single Widget -->
                         </div>
-                        <div class="col-lg-3 col-md-6 col-12">
-                            <!-- Single Widget -->
-                            <div class="single-footer our-app">
-                                <h3>Đối tác</h3>
-                                <ul class="app-btn">
-                                    <li class="logo">
-                                        <img src="../../assets/images/giaohangnhanh.png" alt="">
-                                    </li>
-                                    <li class="logo">
-                                        <img src="../../assets/images/vnairline.png" alt="">
-                                    </li>
-                                    
-                                </ul>
-                            </div>
-                            <!-- End Single Widget -->
-                        </div>
+                        
                         <div class="col-lg-3 col-md-6 col-12">
                             <!-- Single Widget -->
                             <div class="single-footer f-link">
@@ -87,6 +72,23 @@
                                     <li><a href="javascript:void(0)">Sản phẩm</a></li>
                                     <li><a href="javascript:void(0)">Giới thiệu</a></li>
                                     <li><a href="javascript:void(0)">Liên hệ</a></li>
+                                </ul>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer our-app">
+                                <h3>Đối tác</h3>
+                                <ul class="app-btn">
+                                    <li class="logo">
+                                        <img src="../../assets/images/giaohangnhanh.png" alt="" width="200">
+                                    </li>
+                                    <li class="logo">
+                                        <img src="../../assets/images/vnairline.png" alt="" width="200">
+                                    </li>
+                                    
                                 </ul>
                             </div>
                             <!-- End Single Widget -->

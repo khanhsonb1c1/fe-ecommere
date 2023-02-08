@@ -50,5 +50,32 @@ export const addressStore = defineStore({
           });
       });
     },
+
+    createAddress(object : object) {
+      this.loading = true;
+      return new Promise((resolve, reject) => {
+        user_address
+          .get({
+            [`filter[user_id]`]: object,
+          })
+          .then((res) => {
+            this.address = res.data;
+            if (_.isEmpty(res.data)) {
+              this.isAddress = true;
+            } else {
+              this.isAddress = false;
+            }
+            this.loading = false;
+            resolve(this.address);
+          })
+          .catch((err) => {
+            this.loading = false;
+            this.err = err
+            reject(this.err);
+          });
+      });
+    },
+
+
   },
 });

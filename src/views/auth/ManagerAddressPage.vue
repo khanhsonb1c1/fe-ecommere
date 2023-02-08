@@ -2,61 +2,26 @@
   <CustomerManager>
     <template #address>
       <div class="container">
-        <div
-          class="card w-100 mb-3"
+        <AddressCard
           v-for="(address, index) in address_list"
           :key="index"
-        >
-          <div class="card-body">
-            <h5 class="card-title">{{ address.consignee }}</h5>
-            <p class="card-text">
-              <i
-                class="fa-solid fa-location-dot"
-                style="margin-right: 0.5rem; color: rgb(60, 75, 100)"
-              ></i>
-              {{ address.full_address }}
-            </p>
-            <p class="card-text">
-              <i
-                class="fa-solid fa-phone"
-                style="margin-right: 0.5rem; color: rgb(60, 75, 100)"
-              ></i>
-              {{ address.tel }}
-            </p>
-            <p class="card-text">
-              <i
-                class="fas fa-sticky-note"
-                style="margin-right: 0.5rem; color: rgb(60, 75, 100)"
-              ></i>
-              {{ address.note || "..." }}
-            </p>
+          :address="address"
+        />
 
-            <div class="mt-2">
-              <button
-                class="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#formModal"
-              >
-                <i class="fa-solid fa-pen"></i>
-              </button>
-              <button
-                class="btn btn-danger ms-3"
-                data-bs-toggle="modal"
-                data-bs-target="#chooseModal"
-              >
-                <i class="fa-solid fa-trash"></i>
-              </button>
-              <a v-if="address.default">
-                <i
-                  class="fas fa-check ms-5"
-                  style="color: #2eb85c; font-size: large"
-                ></i>
-                <i style="color: #2eb85c">Mặc định</i>
-              </a>
+        <div class="card mt-3 border-dashed">
+          <div
+            class="card-body d-flex justify-content-center"
+            data-bs-toggle="modal"
+            data-bs-target="#createAddressForm"
+          >
+            <div class="wrapper">
+              <i class="far fa-plus fa-fw me-3 color-primary fs-5"></i>
+              <span class="fs-6 color-blue">Thêm địa chỉ mới</span>
             </div>
           </div>
         </div>
-        <modal-edit-address />
+
+        <create-address-form id="createAddressForm"/>
       </div>
     </template>
   </CustomerManager>
@@ -69,14 +34,16 @@ import CustomerManager from "../../components/container/layout/CustomerManager.v
 import { orderStore } from "../../stores/order";
 import { useAuthStore } from "../../stores/auth";
 import { addressStore } from "../../stores/address";
-import ModalEditAddress from "../../components/container/modal/ModalEditAddress.vue";
+import ModalForm from "../../components/container/modal/ModalForm.vue";
+import AddressCard from "../../components/container/card/AddressCard.vue";
+import CreateAddressForm from "../../components/auth/address/CreateAddressForm.vue";
 export default defineComponent({
-  data() {
-    return {};
-  },
+
 
   created() {
-    this.getAddressList();
+    setTimeout(() => {
+      this.getAddressList();
+    }, 2000);
   },
 
   computed: {
@@ -95,8 +62,10 @@ export default defineComponent({
     getAddressList() {
       addressStore().getAddress(this.id_user);
     },
+
+
   },
 
-  components: { CustomerManager, ModalEditAddress },
+  components: { CustomerManager, ModalForm, AddressCard, CreateAddressForm },
 });
 </script>
