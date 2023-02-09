@@ -1,25 +1,12 @@
 <template>
   <CustomerManager>
     <template #order>
-      <div>
-        <table class="table table-bordered">
-          <thead class="table-dark">
-            <tr>
-              <td v-for="(col, index) in column" :key="index">{{ col }}</td>
-            </tr>
-          </thead>
-          <tbody>
-            <wallet-table-item
-              v-for="wallet in wallet_list"
-              :key="wallet.id"
-              :item="wallet"
-            />
-          </tbody>
-        </table>
+      <div class="container">
+        <wallet-card v-for="wallet in wallet_list" :key="wallet.id" :wallet="wallet" />
       </div>
     </template>
   </CustomerManager>
-  <Loading />
+  <!-- <Loading /> -->
 </template>
   
   <script lang="ts">
@@ -27,46 +14,33 @@ import { defineComponent } from "vue";
 import CustomerManager from "../../components/container/layout/CustomerManager.vue";
 import { useAuthStore } from "../../stores/auth";
 import { accountingStore } from "../../stores/accounting";
-import WalletTableItem from "../../components/auth/wallet.vue/WalletTableItem.vue";
+import WalletCard from "../../components/container/card/WalletCard.vue";
 import _ from "lodash";
 export default defineComponent({
   data() {
-    return {
-      column: [
-        "...",
-        "Mã ví",
-        "Loại tiền tệ",
-        "Số dư",
-        "Số dư khả dụng",
-        "Ngày cập nhật",
-      ],
-    };
+    return {};
   },
 
   created() {
     this.getWalletList();
   },
 
-  watch:{
-    id_user(){
-      this.getWalletList()
-    }
+  watch: {
+    id_user() {
+      this.getWalletList();
+    },
   },
 
   computed: {
-
     id_user() {
       return useAuthStore().get_id_user;
     },
     wallet_list() {
-     
-
       return accountingStore().wallets;
     },
   },
 
   methods: {
-    
     getWalletList() {
       if (_.isEmpty(this.id_user)) {
         return;
@@ -75,7 +49,7 @@ export default defineComponent({
     },
   },
 
-  components: { CustomerManager, WalletTableItem },
+  components: { CustomerManager, WalletCard },
 });
 </script>
   

@@ -3,17 +3,17 @@
     <template #address>
       <div class="container">
         <AddressCard
-          v-for="(address, index) in address_list"
+          v-for="(address_item, index) in address"
           :key="index"
-          :address="address"
+          :address="address_item"
         >
           <template #action>
             <ButtonEdit
               id="#updateAddressForm"
-              @Edit="handleEdit(address)"
+              @Edit="handleEdit(address_item)"
             />
 
-            <button-delete @Accept="handleDelete(address.id)" /> </template
+            <button-delete @Accept="handleDelete(address_item.id)" /> </template
         ></AddressCard>
 
         <div class="card mt-3 border-dashed">
@@ -40,7 +40,6 @@
   <script lang="ts">
 import { defineComponent } from "vue";
 import CustomerManager from "../../components/container/layout/CustomerManager.vue";
-import { orderStore } from "../../stores/order";
 import { useAuthStore } from "../../stores/auth";
 import { addressStore } from "../../stores/address";
 import ModalForm from "../../components/container/modal/ModalForm.vue";
@@ -50,30 +49,30 @@ import UpdateAddressForm from "../../components/auth/address/UpdateAddressForm.v
 import ButtonEdit from "../../components/container/button/ButtonEdit.vue";
 import ButtonDelete from "../../components/container/button/ButtonDelete.vue";
 import { user_address } from "../../services/auth";
+import { mapState } from "pinia";
 export default defineComponent({
   data() {
     return {
       address_edit: {},
-      alert: '',
-      error: '',
+      alert: "",
+      error: "",
     };
   },
   created() {
     setTimeout(() => {
-      this.getAddressList();
+      if (this.is_fectch_data) {
+        return;
+      } else {
+        this.getAddressList();
+      }
     }, 2000);
   },
 
   computed: {
-    loading() {
-      return orderStore().loading;
-    },
     id_user() {
       return useAuthStore().get_id_user;
     },
-    address_list() {
-      return addressStore().get_address;
-    },
+    ...mapState(addressStore, ["address", "loading", "is_fectch_data"]),
   },
 
   methods: {
@@ -87,14 +86,17 @@ export default defineComponent({
     },
 
     handleDelete(id: string) {
-      new Promise((resolve, reject) =>{
-        user_address.delete(id).then(()=>{
-          this.getAddressList()
-          resolve(this.alert = 'Xóa thành công')
-        }).catch(err =>{
-          reject(this.alert = err.message)
-        })
-      })
+      new Promise((resolve, reject) => {
+        user_address
+          .delete(id)
+          .then(() => {
+            this.getAddressList();
+            resolve((this.alert = "Xóa thành công"));
+          })
+          .catch((err) => {
+            reject((this.alert = err.message));
+          });
+      });
     },
   },
 

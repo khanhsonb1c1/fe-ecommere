@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import _ from "lodash";
 import { account } from "../services/accounting";
+import Wallet from "../types/Wallet";
 
 export const accountingStore = defineStore({
   id: "accounting",
@@ -8,20 +9,20 @@ export const accountingStore = defineStore({
 
     loading: false,
 
-    wallets: [
-      {
-        id: "" as string,
-        currency_id: "" as string,
-        balance: 0 as number,
-        amount_available_for_payment: 0 as number,
-        walletable_type: "" as string,
-        organization_id: "" as string,
-        updated_at: "" as string,
-        
-      },
-    ],
+    wallets: [{} as Wallet],
+
+    wallet_detail: {} as Wallet,
+
   }),
-  getters: {},
+  getters: {
+    is_fectch_data: (state) => {
+      if (_.isEmpty(state.wallets[0].id)) {
+        return false
+      } else {
+        return true
+      }
+    }
+  },
   actions: {
     getWallets(id: string) {
       this.loading = true;

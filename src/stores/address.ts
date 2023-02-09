@@ -24,6 +24,13 @@ export const addressStore = defineStore({
   getters: {
     get_is_address: (state) => state.isAddress,
     get_address: (state) => state.address,
+    is_fectch_data: (state) => {
+      if (_.isEmpty(state.address[0].id)) {
+        return false
+      } else {
+        return true
+      }
+    }
   },
   actions: {
     getAddress(id: string) {

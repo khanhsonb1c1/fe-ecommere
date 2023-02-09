@@ -54,11 +54,6 @@ export default defineComponent({
     },
   },
 
-  data() {
-    return {
-      show: false,
-    };
-  },
 });
 </script>
 

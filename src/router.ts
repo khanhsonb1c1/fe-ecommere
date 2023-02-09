@@ -11,6 +11,7 @@ import ManagerAddressPage from './views/auth/ManagerAddressPage.vue'
 import ManagerContractPage from './views/auth/ManagerContractPage.vue'
 import ManagerWalletPage from './views/auth/ManagerWalletPage.vue'
 import OrderDetail from "./components/auth/order/OrderDetail.vue"
+import WalletDetailPage from './components/auth/wallet/WalletDetailPage.vue'
 
 
 import { nextTick } from 'vue';
@@ -109,6 +110,16 @@ const router = createRouter({
       path: "/user/wallet",
       name: "wallet",
       component: ManagerWalletPage,
+      meta: {
+        title: "Ví tài khoản",
+        authRequired: true,
+
+      },
+    },
+    {
+      path: "/user/wallet/:id",
+      name: "wallet_detail",
+      component: WalletDetailPage,
       meta: {
         title: "Ví tài khoản",
         authRequired: true,

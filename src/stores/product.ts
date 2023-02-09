@@ -1,26 +1,15 @@
 import { defineStore } from "pinia";
 import { products } from "../services/product";
 import lodash from 'lodash'
+import Product from "../types/Product";
 export const productStore = defineStore({
     id: "products",
     state: () => ({
 
-        product_list: [{
-            id: '' as string,
-            category: {
-                name: '',
-                id: '',
-                parent_id: '',
-            },
-            origin: {
-                name: '',
-            },
-            image_url: '',
-            name: '',
-            created_at: 0 as number,
-            quantity_items: 0,
-            price: 0,
-        }],
+        product_list: [{} as Product],
+
+        
+
         sort: '-created_at' as string,
         filter_b: {} as any,
         filter_a: {} as any,
@@ -28,36 +17,7 @@ export const productStore = defineStore({
         current_page: 1 as number,
         last_page: 0 as number,
 
-        product_detail: {
-            hs_code: '',
-            id: '' as string,
-            category: {
-                name: '',
-                id: '',
-                parent_id: '',
-            },
-            origin: {
-                name: '',
-            },
-            image_url: '',
-            name: '',
-            created_at: 0,
-            updated_at: 0,
-            quantity_items: 0,
-            price: 0,
-            ingredients: '',
-            tax_percent: 0,
-            width: 0,
-            length: 0,
-            height: 0,
-            weight: 0,
-            special: false,
-            private_license: false,
-            banned_export: false,
-            banned_air: false,
-            banned_sea: false,
-
-        },
+        product_detail: {} as Product,
 
         loading: true,
     }),

@@ -5049,6 +5049,8 @@ ol {
     }
 }
 
+/* ======= color ========= */
+
 .btn-white {
     background-color: #fff !important;
 }
@@ -5056,6 +5058,8 @@ ol {
 .btn-gray{
   background-color:#dee2e6 !important ;
 }
+
+
 
 .card-footer {
     background-color: #fffefb !important;
@@ -5067,6 +5071,10 @@ ol {
 
 .color-orgin {
     color: #e14d2a;
+}
+
+.color-red{
+    color: #dc3545 !important
 }
 
 .color-primary {
@@ -5088,6 +5096,11 @@ ol {
 }
 .color-sliver {
     color: #7b8fa1 !important;
+}
+
+/* ======= color ========= */
+.no-border{
+    border: none !important;
 }
 .body {
     background: #f1f1f1;
