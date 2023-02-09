@@ -1,11 +1,11 @@
 <template>
-  <ModalForm title="Chỉnh sửa địa chỉ" :id="id" @handleSubmit="handleCreate">
+  <ModalForm title="Chỉnh sửa địa chỉ" :id="id" @handleSubmit="handleUpdate">
     <template #form>
       <form>
         <input-field
           :value="address.consignee"
           label="Họ và tên"
-          @update:value="address.name = $event"
+          @update:value="address.consignee = $event"
         />
         <input-field
           :value="address.tel"
@@ -42,39 +42,51 @@ import { user_address } from "../../../services/auth";
 import { useAuthStore } from "../../../stores/auth";
 import { addressStore } from "../../../stores/address";
 import ModalForm from "../../container/modal/ModalForm.vue";
+import ButtonCheckBox from "../../container/button/ButtonCheckBox.vue";
 export default defineComponent({
-  components: { InputField, InputAddress, ModalForm },
+  components: { InputField, InputAddress, ModalForm, ButtonCheckBox },
   props: {
     id: {
       type: String,
       requied: true,
     },
-    address_id: {
-      type: String,
-      requied: true,
-      default: "",
-    },
+
     object: {
       type: Object,
       requied: true,
-      default: {},
     },
+  },
+
+  data() {
+    return {
+      address: {
+        id: "",
+        consignee: "",
+        tel: "",
+        note: "",
+        address_detail: "",
+        ward_id: "",
+        default: false,
+      } as any,
+    };
   },
 
   computed: {
     id_user() {
       return useAuthStore().get_id_user;
     },
-    address() {
-      const obj = this.object;
-      return obj;
+  },
+
+  watch: {
+    object() {
+      this.address = this.object;
     },
   },
 
   methods: {
-    handleCreate() {
+    handleUpdate() {
       return user_address
-        .update(this.address_id, {
+        .update(this.address.id, {
           consignee: this.address.consignee,
           tel: this.address.tel,
           note: this.address.note,

@@ -6,7 +6,15 @@
           v-for="(address, index) in address_list"
           :key="index"
           :address="address"
-        />
+        >
+          <template #action>
+            <ButtonEdit
+              id="#updateAddressForm"
+              @Edit="handleEdit(address)"
+            />
+
+            <button-delete @Accept="handleDelete(address.id)" /> </template
+        ></AddressCard>
 
         <div class="card mt-3 border-dashed">
           <div
@@ -21,7 +29,8 @@
           </div>
         </div>
 
-        <create-address-form id="createAddressForm"/>
+        <create-address-form id="createAddressForm" />
+        <update-address-form id="updateAddressForm" :object="address_edit" />
       </div>
     </template>
   </CustomerManager>
@@ -37,9 +46,18 @@ import { addressStore } from "../../stores/address";
 import ModalForm from "../../components/container/modal/ModalForm.vue";
 import AddressCard from "../../components/container/card/AddressCard.vue";
 import CreateAddressForm from "../../components/auth/address/CreateAddressForm.vue";
+import UpdateAddressForm from "../../components/auth/address/UpdateAddressForm.vue";
+import ButtonEdit from "../../components/container/button/ButtonEdit.vue";
+import ButtonDelete from "../../components/container/button/ButtonDelete.vue";
+import { user_address } from "../../services/auth";
 export default defineComponent({
-
-
+  data() {
+    return {
+      address_edit: {},
+      alert: '',
+      error: '',
+    };
+  },
   created() {
     setTimeout(() => {
       this.getAddressList();
@@ -63,9 +81,32 @@ export default defineComponent({
       addressStore().getAddress(this.id_user);
     },
 
+    handleEdit(address: object) {
+      console.log("day la address chon: ", address);
+      this.address_edit = address;
+    },
 
+    handleDelete(id: string) {
+      new Promise((resolve, reject) =>{
+        user_address.delete(id).then(()=>{
+          this.getAddressList()
+          resolve(this.alert = 'Xóa thành công')
+        }).catch(err =>{
+          reject(this.alert = err.message)
+        })
+      })
+    },
   },
 
-  components: { CustomerManager, ModalForm, AddressCard, CreateAddressForm },
+  components: {
+    CustomerManager,
+    ModalForm,
+    AddressCard,
+    CreateAddressForm,
+    UpdateAddressForm,
+    ButtonEdit,
+    ButtonDelete,
+  },
 });
-</script>
+</script>,
+    ButtonDelete

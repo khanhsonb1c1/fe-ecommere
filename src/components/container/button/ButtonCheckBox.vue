@@ -29,6 +29,10 @@ export default defineComponent({
     model(value: string) {
       this.$emit("update:value", value);
     },
+
+    value() {
+      this.model = this.value;
+    },
   },
 });
 </script>

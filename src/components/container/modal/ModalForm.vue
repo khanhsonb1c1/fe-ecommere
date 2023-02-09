@@ -1,15 +1,9 @@
 <template>
-  <div
-    class="modal fade "
-    :id="id"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="false"
-  >
+  <div class="modal fade show" :id="id" tabindex="-1" aria-model="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title text-uppercase" id="exampleModalLabel">{{ title }}</h5>
+          <h5 class="modal-title text-uppercase">{{ title }}</h5>
           <button
             type="button"
             class="btn-close"
@@ -28,7 +22,14 @@
           >
             Hủy
           </button>
-          <button @click="handleClick()" type="button" class="btn btn-primary">Lưu</button>
+          <button
+            data-bs-dismiss="modal"
+            @click="handleClick()"
+            type="button"
+            class="btn btn-primary"
+          >
+            Lưu
+          </button>
         </div>
       </div>
     </div>
@@ -37,19 +38,19 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import _ from 'lodash'
+import _ from "lodash";
 export default defineComponent({
-  props:{
-    id:{
+  props: {
+    id: {
       type: String,
       default: true,
     },
 
-    title:{
+    title: {
       type: String,
-      default: '',
+      default: "",
       requied: false,
-    }
+    },
   },
 
   methods: {
@@ -57,7 +58,6 @@ export default defineComponent({
       this.$emit("handleSubmit");
     }, 500),
   },
-
 });
 </script>
 

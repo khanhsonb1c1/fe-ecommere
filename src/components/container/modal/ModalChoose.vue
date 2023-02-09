@@ -26,7 +26,7 @@
             >
               Hủy
             </button>
-            <button type="button" class="btn btn-primary">Đồng ý</button>
+            <button data-bs-dismiss="modal" type="button" class="btn btn-primary" @click="$emit('handleAccept')">Đồng ý</button>
           </div>
         </div>
       </div>

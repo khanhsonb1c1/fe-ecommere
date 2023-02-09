@@ -25,21 +25,10 @@
       </p>
 
       <div class="mt-2">
-        <button
-          class="btn btn-primary"
-          data-bs-toggle="modal"
-          :data-bs-target="`#address${address.id}`"
-          @click="show = true"
-        >
-          <i class="fa-solid fa-pen"></i>
-        </button>
-        <button
-          class="btn btn-danger ms-3"
-          data-bs-toggle="modal"
-          data-bs-target="#chooseModal"
-        >
-          <i class="fa-solid fa-trash"></i>
-        </button>
+       <!-- action -->
+       <slot name="action"></slot>
+        
+        <!-- ----------------- -->
         <a v-if="address.default">
           <i
             class="fas fa-check ms-5"
@@ -49,7 +38,7 @@
         </a>
       </div>
     </div>
-    <update-address-form :id="`address${address.id}`" :object="address" />
+    <!-- <UpdateAddressForm :id="`updateAddress${address.id}`" :object="address"></UpdateAddressForm> -->
   </div>
 </template>
 
